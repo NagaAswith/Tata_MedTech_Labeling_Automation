@@ -2,7 +2,7 @@
  * ============================================================================
  * MedLabel.ai — Medical Device Labeling Automation & Compliance Platform
  * Tata Elxsi TELIPORT Season 4 · Case Study 4 | Team: Creative Mind
- * Lead Developer & Regulatory Engineer: Aswith
+ * Lead Developer & Regulatory Engineer: Naga Aswith (Vignan's Lara)
  * ============================================================================
  */
 
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
   // ==========================================
-  // 1. DATA STRUCTURES & LOCALIZATION DICTIONARY
+  // 1. DATA STRUCTURES & LOCALIZATION DICTIONARY (6 MARKETS)
   // ==========================================
 
   const DEVICE_PRESETS = {
@@ -119,14 +119,34 @@ document.addEventListener('DOMContentLoaded', () => {
   const TRANSLATIONS = {
     en: {
       name: 'English (United States / FDA Target Market)',
+      short: 'EN',
       flag: '🇺🇸',
       warning: 'CAUTION: Federal Law (USA) restricts this device to sale by or on the order of a licensed physician. Do not use if package is opened or damaged.',
       sterile: 'Sterilized using Ethylene Oxide. Single-use only; do not resterilize.',
       storage: 'Store between 5°C and 25°C in a dry place protected from direct sunlight.',
       deviceDesc: 'HIGH PRECISION VOLUMETRIC INFUSION DEVICE · CLASS IIb'
     },
+    hi: {
+      name: 'हिन्दी (India / CDSCO Compliance)',
+      short: 'HI',
+      flag: '🇮🇳',
+      warning: 'सावधानी: केंद्रीय औषधि मानक नियंत्रण संगठन (CDSCO) नियमों के तहत यह उपकरण केवल पंजीकृत चिकित्सक के पर्चे पर ही विक्रय हेतु है। पैकेज क्षतिग्रस्त होने पर उपयोग न करें।',
+      sterile: 'एथिलीन ऑक्साइड (EO) द्वारा विसंक्रमित। केवल एक बार उपयोग के लिए; पुनः विसंक्रमित न करें।',
+      storage: '5°C से 25°C के बीच सूखे स्थान पर सीधे सूर्य के प्रकाश से दूर रखें।',
+      deviceDesc: 'उच्च परिशुद्धता वॉल्यूमेट्रिक इन्फ्यूजन उपकरण · वर्ग IIb'
+    },
+    te: {
+      name: 'తెలుగు (Telugu / Regional Healthcare)',
+      short: 'TE',
+      flag: '🇮🇳',
+      warning: 'హెచ్చరిక: ఈ వైద్య పరికరం కేవలం రిజిస్టర్డ్ వైద్యుని ప్రిస్క్రిప్షన్ లేదా ఆదేశం ద్వారా మాత్రమే విక్రయించబడాలి. ప్యాకేజీ దెబ్బతిన్నట్లయితే ఉపయోగించవద్దు.',
+      sterile: 'ఇథిలీన్ ఆక్సైడ్ (EO) ద్వారా స్టెరిలైజ్ చేయబడింది. ఒక్కసారి మాత్రమే ఉపయోగించాలి; మళ్లీ స్టెరిలైజ్ చేయరాదు.',
+      storage: '5°C నుండి 25°C ఉష్ణోగ్రత వద్ద ప్రత్యక్ష సూర్యరశ్మి తగలని పొడి ప్రదేశంలో భద్రపరచండి.',
+      deviceDesc: 'అధిక ఖచ్చితత్వం గల వాల్యూమెట్రిక్ ఇన్ఫ్యూషన్ పరికరం · క్లాస్ IIb'
+    },
     de: {
       name: 'Deutsch (Germany / BfArM EU MDR Target Market)',
+      short: 'DE',
       flag: '🇩🇪',
       warning: 'VORSICHT: Dieses Medizinprodukt darf nur durch oder auf Anweisung eines zugelassenen Arztes verwendet werden. Bei beschädigter Verpackung nicht verwenden.',
       sterile: 'Mit Ethylenoxid sterilisiert. Nur zum einmaligen Gebrauch; nicht resterilisieren.',
@@ -135,6 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     fr: {
       name: 'Français (France / ANSM EU MDR Target Market)',
+      short: 'FR',
       flag: '🇫🇷',
       warning: 'ATTENTION: La loi restreint la vente de ce dispositif par ou sur ordonnance d\'un médecin qualifié. Ne pas utiliser si l\'emballage est endommagé.',
       sterile: 'Stérilisé à l\'oxyde d\'éthylène. À usage unique ; ne pas restériliser.',
@@ -143,6 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     es: {
       name: 'Español (Spain / AEMPS EU MDR Target Market)',
+      short: 'ES',
       flag: '🇪🇸',
       warning: 'PRECAUCIÓN: La ley restringe la venta de este dispositivo bajo prescripción médica facultativa. No utilizar si el envase está abierto o deteriorado.',
       sterile: 'Esterilizado con óxido de etileno. Para un solo uso; no reesterilizar.',
@@ -154,23 +176,23 @@ document.addEventListener('DOMContentLoaded', () => {
   // Prepopulated FDA 21 CFR Part 11 Audit Trail Ledger
   let AUDIT_TRAIL = [
     {
-      timestamp: '2026-10-30 22:45:10 UTC',
-      operator: 'Aswith (Lead Regulatory Eng.)',
-      action: 'Template Initialized',
+      timestamp: '2026-10-31 16:35:10 UTC',
+      operator: 'Naga Aswith (Lead Regulatory Eng.)',
+      action: 'Template Initialized (Infusion Pump Model X)',
       hash: '9f8a32b1e76c5432aa81029df4b87c1e',
       status: 'VERIFIED',
       type: 'EDIT'
     },
     {
-      timestamp: '2026-10-30 22:52:18 UTC',
-      operator: 'Aswith (Lead Regulatory Eng.)',
+      timestamp: '2026-10-31 16:42:18 UTC',
+      operator: 'Naga Aswith (Lead Regulatory Eng.)',
       action: 'UDI Checksum Validation (GTIN-14)',
       hash: '3c8e41a0b9432f78e0192a54b3c9902a',
       status: 'VALIDATED',
       type: 'UDI'
     },
     {
-      timestamp: '2026-10-30 23:10:44 UTC',
+      timestamp: '2026-10-31 16:50:44 UTC',
       operator: 'Sarah Jenkins (QA Director)',
       action: 'ISO 15223-1 Symbols Audit',
       hash: '77b819ac4051fe668d2239e88bfa0194',
@@ -178,24 +200,24 @@ document.addEventListener('DOMContentLoaded', () => {
       type: 'SCAN'
     },
     {
-      timestamp: '2026-10-30 23:25:01 UTC',
-      operator: 'Aswith (Lead Regulatory Eng.)',
-      action: 'EU MDR Multilingual Pack Activated',
+      timestamp: '2026-10-31 16:55:01 UTC',
+      operator: 'Naga Aswith (Lead Regulatory Eng.)',
+      action: 'CDSCO Multilingual Pack Activated (Hindi & Telugu)',
       hash: 'bb21908cae105e49c7661048df9911e2',
       status: 'SYNCHRONIZED',
       type: 'EDIT'
     },
     {
-      timestamp: '2026-10-30 23:40:15 UTC',
+      timestamp: '2026-10-31 17:05:15 UTC',
       operator: 'Dr. Michael Chen (VP Regulatory)',
-      action: 'AI Compliance Audit Scan',
+      action: 'AI Compliance Regulatory Scan',
       hash: 'fa558091ca2b6477e30198ac1209341b',
       status: 'GRADE A+',
       type: 'SCAN'
     },
     {
-      timestamp: '2026-10-30 23:58:30 UTC',
-      operator: 'Aswith (Lead Regulatory Eng.)',
+      timestamp: '2026-10-31 17:15:30 UTC',
+      operator: 'Naga Aswith (Lead Regulatory Eng.)',
       action: 'Digital Signature Approved (21 CFR §11.50)',
       hash: 'e480ac92bd038910488274cf1b9a8421',
       status: 'SIGNED',
@@ -290,7 +312,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const auditTrailCountBadge = document.getElementById('audit-trail-count-badge');
   const toastContainer = document.getElementById('toast-container');
 
-  // Localization Elements
+  // 3-Dots Menu & Localization Elements
+  const dotsMenuBtn = document.getElementById('dots-menu-btn');
+  const dotsDropdownMenu = document.getElementById('dots-dropdown-menu');
+  const langOptionBtns = document.querySelectorAll('.lang-option-btn');
+  const dotsCurrentLangText = document.getElementById('dots-current-lang-text');
+  const dotsViewAllLocBtn = document.getElementById('dots-view-all-loc-btn');
+
   const langSwitchBtns = document.querySelectorAll('.lang-switch-btn');
   const activeLangFlag = document.getElementById('active-lang-flag');
   const activeLangTitle = document.getElementById('active-lang-title');
@@ -311,7 +339,6 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => {
       const targetTabId = btn.getAttribute('data-tab');
 
-      // Update button states
       tabButtons.forEach(b => {
         b.classList.remove('active', 'text-teal-700', 'bg-teal-50');
         b.classList.add('text-slate-600');
@@ -319,7 +346,6 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.add('active', 'text-teal-700', 'bg-teal-50');
       btn.classList.remove('text-slate-600');
 
-      // Update panels
       tabPanels.forEach(panel => {
         if (panel.id === targetTabId) {
           panel.classList.remove('hidden');
@@ -331,19 +357,134 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================
-  // 4. GS1 UDI & CHECKSUM ALGORITHMS
+  // 4. 3-DOTS DROPDOWN MENU & MULTI-LANGUAGE
   // ==========================================
 
-  /**
-   * GS1 GTIN-14 Check Digit Calculation
-   * Modulo 10 with alternating weights of 3 and 1 from right to left.
-   */
+  // Toggle 3-dots dropdown menu
+  if (dotsMenuBtn && dotsDropdownMenu) {
+    dotsMenuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dotsDropdownMenu.classList.toggle('hidden');
+    });
+
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!dotsDropdownMenu.contains(e.target) && !dotsMenuBtn.contains(e.target)) {
+        dotsDropdownMenu.classList.add('hidden');
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        dotsDropdownMenu.classList.add('hidden');
+        if (signModal) signModal.classList.add('hidden');
+      }
+    });
+  }
+
+  // Handle language selection from 3-dots dropdown
+  langOptionBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const langKey = btn.getAttribute('data-lang');
+      switchLanguage(langKey);
+      if (dotsDropdownMenu) dotsDropdownMenu.classList.add('hidden');
+    });
+  });
+
+  // Handle language switch from Localization Tab pills
+  langSwitchBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const langKey = btn.getAttribute('data-lang');
+      switchLanguage(langKey);
+    });
+  });
+
+  if (dotsViewAllLocBtn) {
+    dotsViewAllLocBtn.addEventListener('click', () => {
+      if (dotsDropdownMenu) dotsDropdownMenu.classList.add('hidden');
+      const locTabBtn = document.querySelector('[data-tab="tab-localization"]');
+      if (locTabBtn) locTabBtn.click();
+    });
+  }
+
+  function switchLanguage(langKey) {
+    const langData = TRANSLATIONS[langKey];
+    if (!langData) return;
+
+    currentSelectedLang = langKey;
+
+    // 1. Update 3-dots dropdown indicators
+    document.querySelectorAll('.lang-check').forEach(check => {
+      if (check.getAttribute('data-check-lang') === langKey) {
+        check.classList.remove('hidden');
+      } else {
+        check.classList.add('hidden');
+      }
+    });
+
+    if (dotsCurrentLangText) {
+      dotsCurrentLangText.textContent = `${langData.flag} ${langData.short}`;
+    }
+
+    // 2. Update Localization Tab Buttons
+    langSwitchBtns.forEach(b => {
+      if (b.getAttribute('data-lang') === langKey) {
+        b.classList.add('active', 'bg-white', 'text-teal-800', 'shadow-sm');
+        b.classList.remove('text-slate-600');
+      } else {
+        b.classList.remove('active', 'bg-white', 'text-teal-800', 'shadow-sm');
+        b.classList.add('text-slate-600');
+      }
+    });
+
+    // 3. Update Localization View details
+    if (activeLangFlag) activeLangFlag.textContent = langData.flag;
+    if (activeLangTitle) activeLangTitle.textContent = langData.name;
+    if (locPreviewWarning) locPreviewWarning.textContent = langData.warning;
+    if (locPreviewSterile) locPreviewSterile.textContent = langData.sterile;
+    if (locPreviewStorage) locPreviewStorage.textContent = langData.storage;
+    if (locPreviewName) locPreviewName.textContent = `${inputDeviceName.value} (${langData.deviceDesc})`;
+
+    // 4. Update the live physical label warning text & descriptors
+    inputWarningText.value = langData.warning;
+    if (targetMarketIndicator) {
+      targetMarketIndicator.innerHTML = `Market: <strong>${langData.flag} ${langData.short}</strong>`;
+    }
+
+    updateLivePreview();
+    showToast(`Language switched to ${langData.flag} ${langData.name}`, 'info');
+
+    // 5. Append to Part 11 Audit Trail
+    logAuditEvent(`Language Pack Switched: ${langData.name.toUpperCase()}`, 'EDIT', 'SYNCHRONIZED');
+  }
+
+  if (applyTranslationBtn) {
+    applyTranslationBtn.addEventListener('click', () => {
+      const langData = TRANSLATIONS[currentSelectedLang];
+      if (!langData) return;
+
+      inputWarningText.value = langData.warning;
+      targetMarketIndicator.innerHTML = `Market: <strong>${langData.flag} ${langData.short}</strong>`;
+      updateLivePreview();
+
+      const genTabBtn = document.querySelector('[data-tab="tab-generator"]');
+      if (genTabBtn) genTabBtn.click();
+
+      showToast(`Applied ${langData.name} translation to Live Label preview.`, 'success');
+    });
+  }
+
+  // ==========================================
+  // 5. GS1 UDI & CHECKSUM ALGORITHMS
+  // ==========================================
+
   function calculateGtinCheckDigit(gtin13) {
     const digits = gtin13.replace(/\D/g, '').split('').map(Number);
     if (digits.length < 13) return null;
 
     let sum = 0;
-    // For 13 digits, the rightmost index is 12 (weighted 3)
     for (let i = 0; i < 13; i++) {
       const weight = (i % 2 === 0) ? 3 : 1;
       sum += digits[i] * weight;
@@ -360,7 +501,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return expectedCheck === Number(cleaned[13]);
   }
 
-  // Format date to GS1 AI 17 format: YYMMDD
   function formatGs1Date(isoDateStr) {
     if (!isoDateStr) return '281031';
     const parts = isoDateStr.split('-');
@@ -373,7 +513,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return '281031';
   }
 
-  // Generate complete Human Readable Interpretation (HRI) string
   function getUdiHriString() {
     const gtin = inputUdiGtin.value.trim() || '00845921004123';
     const expGs1 = formatGs1Date(inputExpDate.value);
@@ -383,16 +522,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 5. BARCODE & 2D DATAMATRIX SIMULATOR
+  // 6. BARCODE & 2D DATAMATRIX SIMULATOR
   // ==========================================
 
-  /**
-   * Renders a simulated GS1-128 linear barcode as high-contrast SVG stripes
-   */
   function renderSvgBarcode() {
     const hri = getUdiHriString();
     
-    // Deterministic pseudo-random stripe pattern based on string hash
     let hash = 0;
     for (let i = 0; i < hri.length; i++) {
       hash = (hash << 5) - hash + hri.charCodeAt(i);
@@ -403,7 +538,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let svgBars = '';
     let currentX = 2;
 
-    // Start Quiet Zone & Guard Pattern
     svgBars += `<rect x="${currentX}" y="0" width="3" height="48" fill="#000000" />`;
     currentX += 5;
     svgBars += `<rect x="${currentX}" y="0" width="1.5" height="48" fill="#000000" />`;
@@ -418,7 +552,6 @@ document.addEventListener('DOMContentLoaded', () => {
       currentX += width + gap;
     }
 
-    // Stop Guard Pattern
     svgBars += `<rect x="${(currentX + 2).toFixed(1)}" y="0" width="3" height="48" fill="#000000" />`;
     currentX += 7;
     svgBars += `<rect x="${(currentX).toFixed(1)}" y="0" width="1.5" height="48" fill="#000000" />`;
@@ -431,22 +564,19 @@ document.addEventListener('DOMContentLoaded', () => {
       </svg>
     `;
 
-    barcodeSvgContainer.innerHTML = svgString;
+    if (barcodeSvgContainer) {
+      barcodeSvgContainer.innerHTML = svgString;
+    }
   }
 
-  /**
-   * Renders simulated 2D GS1 DataMatrix ECC200 matrix onto canvas
-   * Includes genuine L-shape finder pattern (solid left & bottom, alternating clock on top & right)
-   */
   function renderDataMatrixCanvas() {
     if (!datamatrixCanvas) return;
     const ctx = datamatrixCanvas.getContext('2d');
     const width = datamatrixCanvas.width;
     const height = datamatrixCanvas.height;
-    const matrixDim = 16; // 16x16 DataMatrix grid
+    const matrixDim = 16;
     const cellSize = width / matrixDim;
 
-    // Clear background
     ctx.fillStyle = '#FFFFFF';
     ctx.fillRect(0, 0, width, height);
 
@@ -462,24 +592,15 @@ document.addEventListener('DOMContentLoaded', () => {
       for (let col = 0; col < matrixDim; col++) {
         let isBlack = false;
 
-        // Solid Left Border (Finder L)
         if (col === 0) {
           isBlack = true;
-        }
-        // Solid Bottom Border (Finder L)
-        else if (row === matrixDim - 1) {
+        } else if (row === matrixDim - 1) {
           isBlack = true;
-        }
-        // Alternating Top Border (Clock Track)
-        else if (row === 0) {
+        } else if (row === 0) {
           isBlack = (col % 2 === 0);
-        }
-        // Alternating Right Border (Clock Track)
-        else if (col === matrixDim - 1) {
+        } else if (col === matrixDim - 1) {
           isBlack = (row % 2 === 1);
-        }
-        // Inner data cells based on deterministic pseudo-random hash
-        else {
+        } else {
           seed = (seed * 1103515245 + 12345) & 0x7fffffff;
           isBlack = (seed % 3 !== 0);
         }
@@ -492,11 +613,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 6. LIVE VISUAL PREVIEW SYNCHRONIZATION
+  // 7. LIVE VISUAL PREVIEW SYNCHRONIZATION
   // ==========================================
 
   function updateLivePreview() {
-    // Basic text sync
     const deviceName = inputDeviceName.value.trim() || 'Medical Device';
     previewDeviceName.textContent = deviceName;
     locPreviewName.textContent = `${deviceName} (${inputDeviceClass.value})`;
@@ -509,15 +629,12 @@ document.addEventListener('DOMContentLoaded', () => {
     previewMfrName.textContent = inputMfrName.value.trim() || 'Tata Medical Devices Inc.';
     previewEcrepName.textContent = inputEcrepInfo.value.trim() || 'EU Rep Information';
 
-    // Warnings & Character Counter
     const warningText = inputWarningText.value.trim();
     previewWarningText.textContent = warningText;
     charCountBadge.textContent = `${warningText.length} chars`;
 
-    // Device class subtitle
     previewDeviceDesc.textContent = `HIGH PRECISION MEDICAL SYSTEM · ${inputDeviceClass.value.toUpperCase()}`;
 
-    // GTIN Checksum Status indicator
     const gtinVal = inputUdiGtin.value.trim();
     const isValidGtin = validateGtin14(gtinVal);
     if (isValidGtin) {
@@ -531,7 +648,6 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
     }
 
-    // Toggle ISO Symbols in Preview
     toggleElement(badgeSymSterile, symSterile.checked);
     toggleElement(badgeSymSingleuse, symSingleUse.checked);
     toggleElement(badgeSymKeepdry, symKeepDry.checked);
@@ -542,10 +658,8 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleElement(badgeSymRx, symRx.checked);
     toggleElement(previewMdSymbol, symMd.checked);
 
-    // Update UDI HRI text
     previewUdiHri.textContent = getUdiHriString();
 
-    // Re-render Barcode & DataMatrix
     renderSvgBarcode();
     renderDataMatrixCanvas();
   }
@@ -559,7 +673,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Bind all input change events for instant reactive updates
   const formInputs = [
     inputDeviceName, inputRefModel, inputDeviceClass, inputUdiGtin,
     inputLotNumber, inputSerialNumber, inputMfgDate, inputExpDate,
@@ -574,7 +687,6 @@ document.addEventListener('DOMContentLoaded', () => {
     input.addEventListener('change', updateLivePreview);
   });
 
-  // Label Size Selector
   labelSizeSelect.addEventListener('change', () => {
     if (labelSizeSelect.value === '4x2') {
       previewContainer.classList.remove('label-4x6');
@@ -585,7 +697,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Preset Selector Logic
   presetSelect.addEventListener('change', () => {
     const selectedKey = presetSelect.value;
     const preset = DEVICE_PRESETS[selectedKey];
@@ -615,18 +726,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateLivePreview();
     showToast(`Template loaded: ${preset.name}`, 'info');
-
-    // Add audit entry for template change
     logAuditEvent(`Preset Applied: ${preset.name}`, 'EDIT', 'SUCCESS');
   });
 
-  // Reset to Defaults
   resetDefaultsBtn.addEventListener('click', () => {
     presetSelect.value = 'infusion-pump';
     presetSelect.dispatchEvent(new Event('change'));
   });
 
-  // GTIN Checksum Helper Button
   calcGtinCheckBtn.addEventListener('click', () => {
     const rawVal = inputUdiGtin.value.replace(/\D/g, '');
     if (rawVal.length < 13) {
@@ -640,15 +747,13 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================
-  // 7. AI COMPLIANCE AUDITOR LOGIC
+  // 8. AI COMPLIANCE AUDITOR LOGIC
   // ==========================================
 
   function runAiComplianceScan() {
-    // Switch to Auditor tab
     const auditorTabBtn = document.querySelector('[data-tab="tab-auditor"]');
     if (auditorTabBtn) auditorTabBtn.click();
 
-    // Show Scanning Animation UI
     const progressBox = document.getElementById('scanning-progress-box');
     const progressBar = document.getElementById('scan-progress-bar');
     const progressPercentage = document.getElementById('scan-percentage-text');
@@ -657,7 +762,6 @@ document.addEventListener('DOMContentLoaded', () => {
     progressBox.classList.remove('hidden');
     reportCard.classList.add('opacity-50', 'pointer-events-none');
 
-    // Button spinners
     quickScanIcon.classList.add('hidden');
     quickScanSpinner.classList.remove('hidden');
     quickScanBtn.disabled = true;
@@ -683,7 +787,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }, s.delay);
     });
 
-    // Complete scan after 1.4s
     setTimeout(() => {
       progressBox.classList.add('hidden');
       reportCard.classList.remove('opacity-50', 'pointer-events-none');
@@ -692,7 +795,6 @@ document.addEventListener('DOMContentLoaded', () => {
       quickScanSpinner.classList.add('hidden');
       quickScanBtn.disabled = false;
 
-      // Evaluate actual rules against current form data
       evaluateComplianceRules();
 
       showToast('AI Regulatory Scan Completed: All Systems Verified.', 'success');
@@ -722,7 +824,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (score >= 90) {
       if (scoreTitle) scoreTitle.textContent = 'Regulatory Verification: PASSED';
-      if (scoreSub) scoreSub.textContent = 'Fully compliant for US FDA 510(k)/PMA Commercial Distribution & EU MDR CE Submission.';
+      if (scoreSub) scoreSub.textContent = 'Fully compliant for US FDA 510(k)/PMA Commercial Distribution, EU MDR CE & CDSCO India Release.';
     } else {
       if (scoreTitle) scoreTitle.textContent = 'Regulatory Verification: REQUIRES REMEDIATION';
       if (scoreSub) scoreSub.textContent = 'Non-conforming items flagged. Correct highlighted parameters before release.';
@@ -732,7 +834,6 @@ document.addEventListener('DOMContentLoaded', () => {
   quickScanBtn.addEventListener('click', runAiComplianceScan);
   runAiScanMainBtn.addEventListener('click', runAiComplianceScan);
 
-  // Auto-Remediate Warnings
   remediateWarningsBtn.addEventListener('click', () => {
     calcGtinCheckBtn.click();
     inputWarningText.value = 'CAUTION: Federal Law (USA) restricts this device to sale by or on the order of a licensed physician. Do not use if package is opened or damaged.';
@@ -742,14 +843,13 @@ document.addEventListener('DOMContentLoaded', () => {
     logAuditEvent('AI Auto-Remediation Applied', 'EDIT', 'RESOLVED');
   });
 
-  // Download Compliance Certificate JSON
   downloadAuditCertBtn.addEventListener('click', () => {
     const cert = {
       certificateId: 'MEDLABEL-CERT-2026-TX4',
       projectName: 'MedLabel.ai',
       caseStudy: 'Tata Elxsi TELIPORT Season 4 · Case Study 4',
       team: 'Creative Mind',
-      leadEngineer: 'Aswith',
+      leadEngineer: 'Naga Aswith',
       timestampUtc: new Date().toISOString(),
       deviceProfile: {
         tradeName: inputDeviceName.value,
@@ -764,6 +864,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fdaPart801Udi: 'VALIDATED',
         iso15223SymbolHarmonization: 'PASSED',
         euMdrGspr23: 'COMPLIANT',
+        cdscoIndiaHarmonization: 'VERIFIED',
         shelfLifeIntegrity: 'VERIFIED'
       },
       cryptographicSignature: 'SHA-256: 7f8a19bc0192ea389914bc8a7f0192a83c18b76e'
@@ -771,52 +872,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     downloadJsonFile(cert, `MedLabel_Compliance_Cert_${inputRefModel.value}.json`);
     showToast('Downloaded formal compliance certificate (.JSON)', 'success');
-  });
-
-  // ==========================================
-  // 8. MULTI-MARKET GLOBAL LOCALIZATION LOGIC
-  // ==========================================
-
-  langSwitchBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const langKey = btn.getAttribute('data-lang');
-      const langData = TRANSLATIONS[langKey];
-      if (!langData) return;
-
-      currentSelectedLang = langKey;
-
-      // Update button styling
-      langSwitchBtns.forEach(b => {
-        b.classList.remove('active', 'bg-white', 'text-teal-800', 'shadow-sm');
-        b.classList.add('text-slate-600');
-      });
-      btn.classList.add('active', 'bg-white', 'text-teal-800', 'shadow-sm');
-      btn.classList.remove('text-slate-600');
-
-      // Update Localization View
-      activeLangFlag.textContent = langData.flag;
-      activeLangTitle.textContent = langData.name;
-      locPreviewWarning.textContent = langData.warning;
-      locPreviewSterile.textContent = langData.sterile;
-      locPreviewStorage.textContent = langData.storage;
-      locPreviewName.textContent = `${inputDeviceName.value} (${langData.deviceDesc})`;
-    });
-  });
-
-  applyTranslationBtn.addEventListener('click', () => {
-    const langData = TRANSLATIONS[currentSelectedLang];
-    if (!langData) return;
-
-    inputWarningText.value = langData.warning;
-    targetMarketIndicator.innerHTML = `Language: <strong>${langData.flag} ${currentSelectedLang.toUpperCase()}</strong>`;
-    updateLivePreview();
-
-    // Switch back to generator tab so user sees it live
-    const genTabBtn = document.querySelector('[data-tab="tab-generator"]');
-    if (genTabBtn) genTabBtn.click();
-
-    showToast(`Applied ${langData.name} translation to Live Label preview.`, 'success');
-    logAuditEvent(`Language Pack Applied: ${currentSelectedLang.toUpperCase()}`, 'EDIT', 'SYNCHRONIZED');
   });
 
   // ==========================================
@@ -845,14 +900,14 @@ document.addEventListener('DOMContentLoaded', () => {
       else if (entry.status.includes('FAIL')) statusBadgeClass = 'badge-rose';
 
       tr.innerHTML = `
-        <td class="py-3 px-4 font-mono-code text-[11px] text-slate-600 whitespace-nowrap">${entry.timestamp}</td>
-        <td class="py-3 px-4 font-sans font-semibold text-slate-900">${entry.operator}</td>
-        <td class="py-3 px-4 font-sans text-slate-800">${entry.action}</td>
-        <td class="py-3 px-4 font-mono-code text-[11px] text-teal-800 tracking-wider">
-          <span class="bg-teal-50 px-2 py-0.5 rounded border border-teal-200">#${entry.hash.substring(0, 16)}...</span>
+        <td class="py-3 px-3 sm:px-4 font-mono-code text-[10px] sm:text-[11px] text-slate-600 whitespace-nowrap">${entry.timestamp}</td>
+        <td class="py-3 px-3 sm:px-4 font-sans font-semibold text-slate-900">${entry.operator}</td>
+        <td class="py-3 px-3 sm:px-4 font-sans text-slate-800">${entry.action}</td>
+        <td class="py-3 px-3 sm:px-4 font-mono-code text-[10px] sm:text-[11px] text-teal-800 tracking-wider">
+          <span class="bg-teal-50 px-1.5 sm:px-2 py-0.5 rounded border border-teal-200">#${entry.hash.substring(0, 14)}...</span>
         </td>
-        <td class="py-3 px-4">
-          <span class="${statusBadgeClass} text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">${entry.status}</span>
+        <td class="py-3 px-3 sm:px-4">
+          <span class="${statusBadgeClass} text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">${entry.status}</span>
         </td>
       `;
       auditTrailTbody.appendChild(tr);
@@ -863,8 +918,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const now = new Date();
     const utcStr = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
     
-    // Generate simulated SHA-256 hex snippet
-    const rawData = `${utcStr}_${action}_Aswith_${Math.random()}`;
+    const rawData = `${utcStr}_${action}_NagaAswith_${Math.random()}`;
     let hashVal = 0;
     for (let i = 0; i < rawData.length; i++) {
       hashVal = (hashVal * 31 + rawData.charCodeAt(i)) & 0xffffffff;
@@ -873,7 +927,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     AUDIT_TRAIL.unshift({
       timestamp: utcStr,
-      operator: 'Aswith (Lead Regulatory Eng.)',
+      operator: 'Naga Aswith (Lead Regulatory Eng.)',
       action: action,
       hash: hashHex,
       status: status || 'VERIFIED',
@@ -889,7 +943,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Digital Signature Modal Handlers
   function openSignatureModal() {
     signModal.classList.remove('hidden');
   }
@@ -902,16 +955,14 @@ document.addEventListener('DOMContentLoaded', () => {
   if (closeSignModalBtn) closeSignModalBtn.addEventListener('click', closeSignatureModal);
   if (cancelSignModalBtn) cancelSignModalBtn.addEventListener('click', closeSignatureModal);
 
-  // Submit Part 11 Signature
   if (submitSignatureBtn) {
     submitSignatureBtn.addEventListener('click', () => {
-      const name = document.getElementById('sign-operator-name').value.trim() || 'Aswith';
+      const name = document.getElementById('sign-operator-name').value.trim() || 'Naga Aswith';
       const role = document.getElementById('sign-operator-role').value.trim() || 'Lead Regulatory Eng.';
       const reason = document.getElementById('sign-reason').value;
 
       closeSignatureModal();
 
-      // Log into Part 11 Ledger
       const now = new Date().toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
       AUDIT_TRAIL.unshift({
         timestamp: now,
@@ -923,9 +974,8 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       renderAuditTrailTable(auditFilterAction ? auditFilterAction.value : 'ALL');
-      showToast('Electronic signature recorded and cryptographically sealed under 21 CFR Part 11.', 'success');
+      showToast('Electronic signature recorded and sealed under 21 CFR Part 11.', 'success');
 
-      // Update pending approvals metric
       const metricPending = document.getElementById('metric-pending');
       if (metricPending) {
         const cur = parseInt(metricPending.textContent, 10);
@@ -934,7 +984,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Export Audit CSV
   if (exportAuditCsvBtn) {
     exportAuditCsvBtn.addEventListener('click', () => {
       let csv = 'Timestamp,Operator,Action,SHA256_Hash,Status\n';
@@ -978,7 +1027,6 @@ document.addEventListener('DOMContentLoaded', () => {
     showToast('Exported Vector Label (.SVG)', 'success');
   });
 
-  // Utility download functions
   function downloadTextFile(text, filename, mimeType) {
     const blob = new Blob([text], { type: mimeType });
     const url = URL.createObjectURL(blob);
@@ -996,7 +1044,6 @@ document.addEventListener('DOMContentLoaded', () => {
     downloadTextFile(str, filename, 'application/json');
   }
 
-  // Toast Notification System
   function showToast(message, type = 'info') {
     if (!toastContainer) return;
     const toast = document.createElement('div');

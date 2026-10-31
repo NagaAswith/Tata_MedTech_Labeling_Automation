@@ -2,7 +2,7 @@
 ==============================================================================
 MedLabel.ai — Medical Device Labeling Automation & Compliance Backend
 Tata Elxsi TELIPORT Season 4 · Case Study 4 | Team: Creative Mind
-Lead Developer & Regulatory Engineer: Aswith (Vignan's Lara)
+Lead Developer & Regulatory Engineer: Naga Aswith (Vignan's Lara Institute of Technology and Science)
 ==============================================================================
 """
 
@@ -117,7 +117,7 @@ DEVICE_PRESETS = {
     }
 }
 
-# Multi-lingual Medical Translation Dictionary
+# Multi-lingual Medical Translation Dictionary (6 Markets including Hindi & Telugu)
 LOCALIZATION_DATA = {
     "en": {
         "market": "United States (FDA)",
@@ -126,6 +126,22 @@ LOCALIZATION_DATA = {
         "storage": "Store between 5°C and 25°C in a dry place protected from direct sunlight.",
         "rxTerm": "Rx Only",
         "singleUseTerm": "Do Not Re-use"
+    },
+    "hi": {
+        "market": "India (CDSCO National Compliance)",
+        "warning": "सावधानी: केंद्रीय औषधि मानक नियंत्रण संगठन (CDSCO) नियमों के तहत यह उपकरण केवल पंजीकृत चिकित्सक के पर्चे पर ही विक्रय हेतु है। पैकेज क्षतिग्रस्त होने पर उपयोग न करें।",
+        "sterile": "एथिलीन ऑक्साइड (EO) द्वारा विसंक्रमित। केवल एक बार उपयोग के लिए; पुनः विसंक्रमित न करें।",
+        "storage": "5°C से 25°C के बीच सूखे स्थान पर सीधे सूर्य के प्रकाश से दूर रखें।",
+        "rxTerm": "केवल पर्चे पर",
+        "singleUseTerm": "पुनः उपयोग न करें"
+    },
+    "te": {
+        "market": "India (Regional AP & TS Healthcare)",
+        "warning": "హెచ్చరిక: ఈ వైద్య పరికరం కేవలం రిజిస్టర్డ్ వైద్యుని ప్రిస్క్రిప్షన్ లేదా ఆదేశం ద్వారా మాత్రమే విక్రయించబడాలి. ప్యాకేజీ దెబ్బతిన్నట్లయితే ఉపయోగించవద్దు.",
+        "sterile": "ఇథిలీన్ ఆక్సైడ్ (EO) ద్వారా స్టెరిలైజ్ చేయబడింది. ఒక్కసారి మాత్రమే ఉపయోగించాలి; మళ్లీ స్టెరిలైజ్ చేయరాదు.",
+        "storage": "5°C నుండి 25°C ఉష్ణోగ్రత వద్ద ప్రత్యక్ష సూర్యరశ్మి తగలని పొడి ప్రదేశంలో భద్రపరచండి.",
+        "rxTerm": "ప్రిస్క్రిప్షన్ మాత్రమే",
+        "singleUseTerm": "మళ్లీ ఉపయోగించవద్దు"
     },
     "de": {
         "market": "Germany (BfArM / EU MDR)",
@@ -156,23 +172,23 @@ LOCALIZATION_DATA = {
 # In-memory FDA 21 CFR Part 11 Audit Trail Storage
 AUDIT_TRAIL_RECORDS = [
     {
-        "timestamp": "2026-10-30 22:45:10 UTC",
-        "operator": "Aswith (Lead Regulatory Eng.)",
-        "action": "Template Initialized",
+        "timestamp": "2026-10-31 16:35:10 UTC",
+        "operator": "Naga Aswith (Lead Regulatory Eng.)",
+        "action": "Template Initialized (Infusion Pump Model X)",
         "hash": "9f8a32b1e76c5432aa81029df4b87c1e",
         "status": "VERIFIED",
         "type": "EDIT"
     },
     {
-        "timestamp": "2026-10-30 22:52:18 UTC",
-        "operator": "Aswith (Lead Regulatory Eng.)",
+        "timestamp": "2026-10-31 16:42:18 UTC",
+        "operator": "Naga Aswith (Lead Regulatory Eng.)",
         "action": "UDI Checksum Validation (GTIN-14)",
         "hash": "3c8e41a0b9432f78e0192a54b3c9902a",
         "status": "VALIDATED",
         "type": "UDI"
     },
     {
-        "timestamp": "2026-10-30 23:10:44 UTC",
+        "timestamp": "2026-10-31 16:50:44 UTC",
         "operator": "Sarah Jenkins (QA Director)",
         "action": "ISO 15223-1 Symbols Audit",
         "hash": "77b819ac4051fe668d2239e88bfa0194",
@@ -180,24 +196,24 @@ AUDIT_TRAIL_RECORDS = [
         "type": "SCAN"
     },
     {
-        "timestamp": "2026-10-30 23:25:01 UTC",
-        "operator": "Aswith (Lead Regulatory Eng.)",
-        "action": "EU MDR Multilingual Pack Activated",
+        "timestamp": "2026-10-31 16:55:01 UTC",
+        "operator": "Naga Aswith (Lead Regulatory Eng.)",
+        "action": "CDSCO Multilingual Pack Activated (Hindi & Telugu)",
         "hash": "bb21908cae105e49c7661048df9911e2",
         "status": "SYNCHRONIZED",
         "type": "EDIT"
     },
     {
-        "timestamp": "2026-10-30 23:40:15 UTC",
+        "timestamp": "2026-10-31 17:05:15 UTC",
         "operator": "Dr. Michael Chen (VP Regulatory)",
-        "action": "AI Compliance Audit Scan",
+        "action": "AI Compliance Regulatory Scan",
         "hash": "fa558091ca2b6477e30198ac1209341b",
         "status": "GRADE A+",
         "type": "SCAN"
     },
     {
-        "timestamp": "2026-10-30 23:58:30 UTC",
-        "operator": "Aswith (Lead Regulatory Eng.)",
+        "timestamp": "2026-10-31 17:15:30 UTC",
+        "operator": "Naga Aswith (Lead Regulatory Eng.)",
         "action": "Digital Signature Approved (21 CFR §11.50)",
         "hash": "e480ac92bd038910488274cf1b9a8421",
         "status": "SIGNED",
@@ -237,7 +253,7 @@ try:
 
     app = FastAPI(
         title="MedLabel.ai API",
-        description="End-to-End Medical Device Labeling Automation & Compliance Backend for Tata Elxsi TELIPORT Season 4 (Team Creative Mind)",
+        description="End-to-End Medical Device Labeling Automation & Compliance Backend for Tata Elxsi TELIPORT Season 4 (Team Creative Mind, Naga Aswith)",
         version="1.4.2"
     )
 
@@ -285,10 +301,11 @@ try:
                 "FDA 21 CFR Part 830 (Unique Device Identification)",
                 "FDA 21 CFR Part 11 (Electronic Records & Signatures)",
                 "EU MDR 2017/745 (Annex I GSPR 23)",
+                "CDSCO India Medical Device Rules 2017",
                 "ISO 15223-1:2021 (Medical Device Symbols)"
             ],
-            "team": "Creative Mind (Vignan's Lara)",
-            "leadEngineer": "Aswith",
+            "team": "Creative Mind (Vignan's Lara Institute of Technology and Science)",
+            "leadEngineer": "Naga Aswith",
             "timestamp": datetime.now(timezone.utc).isoformat()
         }
 
@@ -315,7 +332,6 @@ try:
     def audit_compliance(req: LabelRequest):
         is_gtin_valid = validate_gtin14(req.gtin)
         
-        # Date integrity
         try:
             mfg_d = datetime.strptime(req.mfgDate, "%Y-%m-%d")
             exp_d = datetime.strptime(req.expDate, "%Y-%m-%d")
@@ -334,7 +350,7 @@ try:
 
         checks = [
             {
-                "standard": "FDA 21 CFR Part 801 (UDI)",
+                "standard": "FDA 21 CFR Part 801 & CDSCO (UDI)",
                 "status": "VALIDATED" if is_gtin_valid else "FAILED",
                 "details": "GTIN-14 checksum and Application Identifiers verified." if is_gtin_valid else "Invalid GTIN-14 check digit."
             },
@@ -355,7 +371,6 @@ try:
             }
         ]
 
-        # Log audit action
         audit_record = {
             "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC"),
             "operator": "MedLabel Algorithmic Regulatory Engine",
@@ -423,13 +438,13 @@ try:
     if __name__ == "__main__":
         print("=" * 70)
         print("  MedLabel.ai — Tata Elxsi TELIPORT Season 4 (Team Creative Mind)")
+        print("  Lead: Naga Aswith | Vignan's Lara Institute of Technology and Science")
         print("  FastAPI Server listening on http://127.0.0.1:8000")
         print("  Access the full Dashboard UI at: http://localhost:8000")
         print("=" * 70)
         uvicorn.run("server:app", host="127.0.0.1", port=8000, reload=True)
 
 except ImportError:
-    # Graceful fallback to Python built-in http.server if FastAPI is not yet installed
     import http.server
     import socketserver
 
@@ -444,7 +459,6 @@ except ImportError:
         print("  Open http://localhost:8000 in your browser to view MedLabel.ai UI!")
         print("=" * 70)
         os.chdir(os.path.dirname(os.path.abspath(__file__)))
-        # Enable address reuse to prevent port-in-use errors
         socketserver.TCPServer.allow_reuse_address = True
         with socketserver.TCPServer(("127.0.0.1", PORT), Handler) as httpd:
             try:

@@ -1,6 +1,7 @@
 /* ==========================================================================
    MedLabel.ai — End-to-End Medical Device Labeling & Compliance Platform
    Tata Elxsi TELIPORT Season 4 · Case Study 4 | Team: Creative Mind
+   Lead Engineer: Naga Aswith (Vignan's Lara Institute of Technology and Science)
    Design System & Custom Clinical Engineering Stylesheet
    ========================================================================== */
 
@@ -42,6 +43,12 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 body {
@@ -51,6 +58,15 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+}
+
+/* Multilingual Font Supports for Hindi and Telugu */
+.font-hindi {
+  font-family: "Noto Sans Devanagari", "Mangal", "Kokila", -apple-system, sans-serif;
+}
+
+.font-telugu {
+  font-family: "Noto Sans Telugu", "Gautami", "Vani", -apple-system, sans-serif;
 }
 
 /* Monospace font for UDI and Hashes */
@@ -72,6 +88,14 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #94A3B8;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* Pulse animation for system health */
@@ -131,10 +155,11 @@ body {
   position: relative;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease-in-out;
+  max-width: 100%;
 }
 
 .medical-physical-label.label-4x6 {
-  min-height: 520px;
+  min-height: 500px;
 }
 
 .medical-physical-label.label-4x2 {
@@ -159,8 +184,8 @@ body {
   align-items: center;
   justify-content: center;
   border: 1.5px solid #000000;
-  padding: 2px 6px;
-  font-size: 11px;
+  padding: 2px 5px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1.1;
   text-transform: uppercase;
@@ -175,32 +200,55 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-width: 44px;
-  height: 44px;
+  min-width: 40px;
+  height: 40px;
   border: 1.5px solid #000000;
-  padding: 3px;
+  padding: 2px;
   background: #FFFFFF;
   position: relative;
 }
 
+@media (min-width: 640px) {
+  .iso-box {
+    padding: 2px 6px;
+    font-size: 11px;
+  }
+  .iso-icon-cell {
+    min-width: 44px;
+    height: 44px;
+    padding: 3px;
+  }
+}
+
 .iso-icon-cell svg {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   stroke: #000000;
   fill: none;
+}
+
+@media (min-width: 640px) {
+  .iso-icon-cell svg {
+    width: 28px;
+    height: 28px;
+  }
 }
 
 /* Barcode graphics simulator */
 .barcode-svg {
   display: block;
   width: 100%;
-  height: 55px;
+  height: 48px;
   shape-rendering: crispEdges;
 }
 
+@media (min-width: 640px) {
+  .barcode-svg {
+    height: 55px;
+  }
+}
+
 .datamatrix-box {
-  width: 64px;
-  height: 64px;
   border: 1px solid #000000;
   padding: 2px;
   background: #FFFFFF;
@@ -227,7 +275,8 @@ body {
   user-select: none;
   cursor: pointer;
 }
-.symbol-checkbox-pill input:checked + div {
+.symbol-checkbox-pill input:checked + div,
+.symbol-checkbox-pill:has(input:checked) {
   background-color: var(--teal-tint);
   border-color: var(--teal-primary);
   color: var(--teal-primary);
@@ -260,7 +309,7 @@ body {
 
 /* Modal backdrop styling */
 .modal-backdrop {
-  background-color: rgba(15, 23, 42, 0.55);
+  background-color: rgba(15, 23, 42, 0.6);
   backdrop-filter: blur(4px);
 }
 
@@ -276,6 +325,7 @@ body {
   /* Hide all dashboard chrome */
   header,
   nav,
+  aside,
   .no-print,
   #overview-metrics,
   #left-form-column,
@@ -288,6 +338,7 @@ body {
   #main-content {
     padding: 0 !important;
     margin: 0 !important;
+    max-width: 100% !important;
   }
 
   #right-preview-column {

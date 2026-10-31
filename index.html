@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>MedLabel.ai — Medical Device Labeling Automation & Compliance (Tata Elxsi TELIPORT Season 4)</title>
   
   <!-- Tailwind CSS CDN with full fallbacks in styles.css -->
@@ -39,17 +39,17 @@
   <!-- ==========================================
        TOP NOTIFICATION BANNER / STATUS STRIP
        ========================================== -->
-  <aside aria-label="System status" class="no-print bg-slate-900 text-slate-300 text-xs py-1.5 px-4 sm:px-6 border-b border-slate-800 flex flex-wrap items-center justify-between gap-2">
+  <aside aria-label="System status" class="no-print bg-slate-900 text-slate-300 text-xs py-1.5 px-3 sm:px-6 border-b border-slate-800 flex flex-wrap items-center justify-between gap-2">
     <div class="flex items-center space-x-2">
-      <span class="pulse-indicator"></span>
-      <span class="font-medium text-slate-200">FDA 21 CFR Part 801 & EU MDR 2017/745 Compliance Engine:</span>
-      <span class="text-emerald-400 font-semibold tracking-wide">ACTIVE & SYNCHRONIZED</span>
+      <span class="pulse-indicator flex-shrink-0"></span>
+      <span class="font-medium text-slate-200">FDA 21 CFR & EU MDR Compliance Engine:</span>
+      <span class="text-emerald-400 font-semibold tracking-wide">ACTIVE</span>
       <span class="hidden md:inline text-slate-500">|</span>
-      <span class="hidden md:inline text-slate-400">GS1 General Specs v23.0 Compliant</span>
+      <span class="hidden md:inline text-slate-400">GS1 v23.0 & CDSCO Harmonized</span>
     </div>
-    <div class="flex items-center space-x-4">
-      <span class="hidden sm:inline text-slate-400 font-mono-code">Operator: <strong class="text-white">Aswith</strong> (Lead Regulatory Eng.)</span>
-      <span class="bg-slate-800 text-teal-400 px-2 py-0.5 rounded text-[11px] font-mono-code border border-slate-700">Audit Ledger: #SHA-256</span>
+    <div class="flex items-center space-x-3 text-[11px]">
+      <span class="hidden sm:inline text-slate-400 font-mono-code">Lead: <strong class="text-white">Naga Aswith</strong> (Vignan's Lara)</span>
+      <span class="bg-slate-800 text-teal-400 px-2 py-0.5 rounded font-mono-code border border-slate-700">Audit: #SHA-256</span>
     </div>
   </aside>
 
@@ -57,89 +57,201 @@
        PRIMARY NAVIGATION HEADER
        ========================================== -->
   <header class="no-print bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         
         <!-- Brand Logo & Team Attribution -->
-        <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-lg bg-teal-700 flex items-center justify-center text-white shadow-sm flex-shrink-0">
+        <div class="flex items-center space-x-2.5 sm:space-x-3">
+          <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-teal-700 flex items-center justify-center text-white shadow-sm flex-shrink-0">
             <!-- Medical Cross & Barcode Icon -->
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-3-3v6m-7 5h16a2 2 0 002-2V6a2 2 0 00-2-2H4a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
             </svg>
           </div>
           <div>
-            <div class="flex items-center space-x-2">
-              <span class="text-xl font-bold tracking-tight text-slate-900">MedLabel<span class="text-teal-700">.ai</span></span>
-              <span class="bg-teal-50 text-teal-800 text-xs font-semibold px-2 py-0.5 rounded-full border border-teal-200">v1.4 Enterprise</span>
+            <div class="flex items-center space-x-1.5 sm:space-x-2">
+              <span class="text-lg sm:text-xl font-bold tracking-tight text-slate-900">MedLabel<span class="text-teal-700">.ai</span></span>
+              <span class="bg-teal-50 text-teal-800 text-[10px] sm:text-xs font-semibold px-2 py-0.5 rounded-full border border-teal-200">v1.4</span>
             </div>
-            <p class="text-[11px] text-slate-500 font-medium">Tata Elxsi TELIPORT Season 4 · Case Study 4 · <span class="text-teal-700 font-semibold">Team Creative Mind</span></p>
+            <p class="text-[10px] sm:text-[11px] text-slate-500 font-medium truncate max-w-[200px] sm:max-w-none">
+              Tata Elxsi TELIPORT S4 · <span class="text-teal-700 font-semibold">Team Creative Mind (Naga Aswith)</span>
+            </p>
           </div>
         </div>
 
-        <!-- Right Quick Actions -->
-        <div class="flex items-center space-x-2 sm:space-x-3">
-          <button id="quick-scan-btn" type="button" class="inline-flex items-center px-3 py-1.5 text-xs sm:text-sm font-medium rounded-md text-teal-800 bg-teal-50 border border-teal-300 hover:bg-teal-100 transition shadow-sm">
-            <svg class="w-4 h-4 mr-1.5 text-teal-700 animate-spin hidden" id="quick-scan-spinner" fill="none" viewBox="0 0 24 24">
+        <!-- Right Quick Actions & 3-Dots Multi-Language Menu -->
+        <div class="flex items-center space-x-1.5 sm:space-x-3">
+          
+          <!-- Scan Button -->
+          <button id="quick-scan-btn" type="button" class="inline-flex items-center px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm font-medium rounded-md text-teal-800 bg-teal-50 border border-teal-300 hover:bg-teal-100 transition shadow-sm">
+            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1 sm:mr-1.5 text-teal-700 animate-spin hidden" id="quick-scan-spinner" fill="none" viewBox="0 0 24 24">
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
               <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            <svg class="w-4 h-4 mr-1.5 text-teal-700" id="quick-scan-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1 sm:mr-1.5 text-teal-700" id="quick-scan-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
             </svg>
-            <span>Scan Compliance</span>
+            <span class="hidden xs:inline">Scan</span><span class="inline xs:hidden">Scan</span>
           </button>
 
-          <button id="print-label-btn" type="button" class="inline-flex items-center px-3 py-1.5 text-xs sm:text-sm font-medium rounded-md text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 transition shadow-sm">
+          <!-- Print Button (Hidden on extra small screens) -->
+          <button id="print-label-btn" type="button" class="hidden sm:inline-flex items-center px-3 py-1.5 text-xs sm:text-sm font-medium rounded-md text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 transition shadow-sm">
             <svg class="w-4 h-4 mr-1.5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
             </svg>
-            <span>Print Label</span>
+            <span>Print</span>
           </button>
 
-          <button id="open-sign-modal-btn" type="button" class="inline-flex items-center px-3.5 py-1.5 text-xs sm:text-sm font-medium rounded-md text-white bg-teal-700 hover:bg-teal-800 transition shadow-sm">
-            <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <!-- 21 CFR Sign-off Button -->
+          <button id="open-sign-modal-btn" type="button" class="inline-flex items-center px-2.5 sm:px-3.5 py-1.5 text-xs sm:text-sm font-medium rounded-md text-white bg-teal-700 hover:bg-teal-800 transition shadow-sm">
+            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1 sm:mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
             </svg>
-            <span>21 CFR Sign-off</span>
+            <span>Sign</span>
           </button>
+
+          <!-- 3-DOTS MULTI-LANGUAGE DROPDOWN MENU -->
+          <div class="relative inline-block text-left" id="lang-dropdown-wrapper">
+            <button id="dots-menu-btn" type="button" class="inline-flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-md border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-teal-600 transition shadow-sm" title="Global Localization & Language Options (English, Hindi, Telugu, German, French, Spanish)">
+              <!-- 3-Dots Horizontal / Vertical Icon -->
+              <svg class="w-5 h-5 text-slate-600" fill="currentColor" viewBox="0 0 24 24">
+                <circle cx="12" cy="5" r="2"></circle>
+                <circle cx="12" cy="12" r="2"></circle>
+                <circle cx="12" cy="19" r="2"></circle>
+              </svg>
+            </button>
+
+            <!-- Dropdown Menu Content -->
+            <div id="dots-dropdown-menu" class="hidden origin-top-right absolute right-0 mt-2 w-64 rounded-xl shadow-xl bg-white ring-1 ring-black ring-opacity-5 divide-y divide-slate-100 z-50 focus:outline-none">
+              <div class="px-3.5 py-2.5 bg-slate-50 rounded-t-xl border-b border-slate-100">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-slate-900 uppercase tracking-wider">Multi-Market Language</span>
+                  <span class="text-[10px] bg-teal-100 text-teal-800 font-bold px-1.5 py-0.5 rounded">6 Markets</span>
+                </div>
+                <p class="text-[11px] text-slate-500 mt-0.5">Instant regulatory warning translation</p>
+              </div>
+
+              <div class="py-1.5 text-xs font-medium" role="menu">
+                
+                <!-- English -->
+                <button type="button" class="lang-option-btn w-full text-left px-3.5 py-2 hover:bg-slate-50 flex items-center justify-between text-slate-800 transition" data-lang="en">
+                  <div class="flex items-center space-x-2.5">
+                    <span class="text-base">🇺🇸</span>
+                    <div>
+                      <div class="font-bold">English (US FDA)</div>
+                      <div class="text-[10px] text-slate-500">21 CFR Part 801 Standard</div>
+                    </div>
+                  </div>
+                  <span class="lang-check text-teal-700 font-bold" data-check-lang="en">✓</span>
+                </button>
+
+                <!-- Hindi (CDSCO) -->
+                <button type="button" class="lang-option-btn w-full text-left px-3.5 py-2 hover:bg-slate-50 flex items-center justify-between text-slate-800 transition" data-lang="hi">
+                  <div class="flex items-center space-x-2.5">
+                    <span class="text-base">🇮🇳</span>
+                    <div>
+                      <div class="font-bold text-teal-900">हिन्दी (Hindi / CDSCO)</div>
+                      <div class="text-[10px] text-slate-500">Central Drugs Standard Control</div>
+                    </div>
+                  </div>
+                  <span class="lang-check text-teal-700 font-bold hidden" data-check-lang="hi">✓</span>
+                </button>
+
+                <!-- Telugu (Regional MedTech) -->
+                <button type="button" class="lang-option-btn w-full text-left px-3.5 py-2 hover:bg-slate-50 flex items-center justify-between text-slate-800 transition" data-lang="te">
+                  <div class="flex items-center space-x-2.5">
+                    <span class="text-base">🇮🇳</span>
+                    <div>
+                      <div class="font-bold text-teal-900">తెలుగు (Telugu / Regional)</div>
+                      <div class="text-[10px] text-slate-500">State & Regional Healthcare</div>
+                    </div>
+                  </div>
+                  <span class="lang-check text-teal-700 font-bold hidden" data-check-lang="te">✓</span>
+                </button>
+
+                <!-- German (BfArM) -->
+                <button type="button" class="lang-option-btn w-full text-left px-3.5 py-2 hover:bg-slate-50 flex items-center justify-between text-slate-800 transition" data-lang="de">
+                  <div class="flex items-center space-x-2.5">
+                    <span class="text-base">🇩🇪</span>
+                    <div>
+                      <div class="font-bold">Deutsch (Germany)</div>
+                      <div class="text-[10px] text-slate-500">BfArM / EU MDR GSPR 23</div>
+                    </div>
+                  </div>
+                  <span class="lang-check text-teal-700 font-bold hidden" data-check-lang="de">✓</span>
+                </button>
+
+                <!-- French (ANSM) -->
+                <button type="button" class="lang-option-btn w-full text-left px-3.5 py-2 hover:bg-slate-50 flex items-center justify-between text-slate-800 transition" data-lang="fr">
+                  <div class="flex items-center space-x-2.5">
+                    <span class="text-base">🇫🇷</span>
+                    <div>
+                      <div class="font-bold">Français (France)</div>
+                      <div class="text-[10px] text-slate-500">ANSM / EU MDR Article 10</div>
+                    </div>
+                  </div>
+                  <span class="lang-check text-teal-700 font-bold hidden" data-check-lang="fr">✓</span>
+                </button>
+
+                <!-- Spanish (AEMPS) -->
+                <button type="button" class="lang-option-btn w-full text-left px-3.5 py-2 hover:bg-slate-50 flex items-center justify-between text-slate-800 transition" data-lang="es">
+                  <div class="flex items-center space-x-2.5">
+                    <span class="text-base">🇪🇸</span>
+                    <div>
+                      <div class="font-bold">Español (Spain)</div>
+                      <div class="text-[10px] text-slate-500">AEMPS / LATAM Distribution</div>
+                    </div>
+                  </div>
+                  <span class="lang-check text-teal-700 font-bold hidden" data-check-lang="es">✓</span>
+                </button>
+
+              </div>
+
+              <div class="p-2 bg-slate-50 rounded-b-xl border-t border-slate-100 flex items-center justify-between text-[11px]">
+                <span class="text-slate-500">Current: <strong id="dots-current-lang-text" class="text-teal-800">🇺🇸 EN</strong></span>
+                <button type="button" id="dots-view-all-loc-btn" class="text-teal-700 hover:text-teal-900 font-semibold underline">View Matrix →</button>
+              </div>
+
+            </div>
+          </div>
+
         </div>
 
       </div>
 
-      <!-- Navigation Tabs -->
-      <nav id="tabs-container" class="flex space-x-1 sm:space-x-4 border-t border-slate-100 overflow-x-auto text-sm" aria-label="Tabs">
-        <button type="button" data-tab="tab-generator" class="nav-tab-btn active py-3 px-3 inline-flex items-center text-slate-700 font-medium whitespace-nowrap">
-          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <!-- Navigation Tabs (Horizontally scrollable on mobile) -->
+      <nav id="tabs-container" class="flex space-x-2 sm:space-x-4 border-t border-slate-100 overflow-x-auto text-xs sm:text-sm no-scrollbar py-1" aria-label="Tabs">
+        <button type="button" data-tab="tab-generator" class="nav-tab-btn active py-2.5 sm:py-3 px-2.5 sm:px-3 inline-flex items-center text-slate-700 font-medium whitespace-nowrap rounded-t-md">
+          <svg class="w-4 h-4 mr-1.5 sm:mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
           </svg>
-          Label Generator & Designer
+          Label Generator
         </button>
-        <button type="button" data-tab="tab-auditor" class="nav-tab-btn py-3 px-3 inline-flex items-center text-slate-600 hover:text-slate-900 font-medium whitespace-nowrap">
-          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <button type="button" data-tab="tab-auditor" class="nav-tab-btn py-2.5 sm:py-3 px-2.5 sm:px-3 inline-flex items-center text-slate-600 hover:text-slate-900 font-medium whitespace-nowrap rounded-t-md">
+          <svg class="w-4 h-4 mr-1.5 sm:mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
           </svg>
           AI Compliance Auditor
-          <span class="ml-1.5 bg-emerald-100 text-emerald-800 text-[10px] font-bold px-1.5 py-0.5 rounded-full">Auto-Audit</span>
+          <span class="ml-1 bg-emerald-100 text-emerald-800 text-[10px] font-bold px-1.5 py-0.2 rounded-full hidden sm:inline">Auto</span>
         </button>
-        <button type="button" data-tab="tab-localization" class="nav-tab-btn py-3 px-3 inline-flex items-center text-slate-600 hover:text-slate-900 font-medium whitespace-nowrap">
-          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <button type="button" data-tab="tab-localization" class="nav-tab-btn py-2.5 sm:py-3 px-2.5 sm:px-3 inline-flex items-center text-slate-600 hover:text-slate-900 font-medium whitespace-nowrap rounded-t-md">
+          <svg class="w-4 h-4 mr-1.5 sm:mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
           </svg>
-          Global Localization (4 Languages)
+          Global Localization (6)
         </button>
-        <button type="button" data-tab="tab-audit-trail" class="nav-tab-btn py-3 px-3 inline-flex items-center text-slate-600 hover:text-slate-900 font-medium whitespace-nowrap">
-          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <button type="button" data-tab="tab-audit-trail" class="nav-tab-btn py-2.5 sm:py-3 px-2.5 sm:px-3 inline-flex items-center text-slate-600 hover:text-slate-900 font-medium whitespace-nowrap rounded-t-md">
+          <svg class="w-4 h-4 mr-1.5 sm:mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
-          21 CFR Part 11 Audit Trail
-          <span id="audit-trail-count-badge" class="ml-1.5 bg-slate-100 text-slate-700 text-[10px] font-bold px-1.5 py-0.5 rounded-full">6</span>
+          21 CFR Part 11 Audit
+          <span id="audit-trail-count-badge" class="ml-1 bg-slate-100 text-slate-700 text-[10px] font-bold px-1.5 py-0.2 rounded-full">6</span>
         </button>
-        <button type="button" data-tab="tab-case-study" class="nav-tab-btn py-3 px-3 inline-flex items-center text-slate-600 hover:text-slate-900 font-medium whitespace-nowrap">
-          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <button type="button" data-tab="tab-case-study" class="nav-tab-btn py-2.5 sm:py-3 px-2.5 sm:px-3 inline-flex items-center text-slate-600 hover:text-slate-900 font-medium whitespace-nowrap rounded-t-md">
+          <svg class="w-4 h-4 mr-1.5 sm:mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
           </svg>
-          TELIPORT Case Study 4 Brief
+          Case Study 4 Brief
         </button>
       </nav>
 
@@ -149,69 +261,69 @@
   <!-- ==========================================
        OVERVIEW METRICS BANNER (EXECUTIVE KPIs)
        ========================================== -->
-  <section id="overview-metrics" class="no-print bg-slate-100/70 border-b border-slate-200 py-3.5 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+  <section id="overview-metrics" class="no-print bg-slate-100/70 border-b border-slate-200 py-3 px-3 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
       
       <!-- Metric 1: Active Templates -->
-      <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm flex items-center space-x-3.5">
-        <div class="p-2.5 rounded-md bg-teal-50 text-teal-700 border border-teal-100 flex-shrink-0">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="bg-white p-3 sm:p-3.5 rounded-lg border border-slate-200 shadow-sm flex items-center space-x-3">
+        <div class="p-2 sm:p-2.5 rounded-md bg-teal-50 text-teal-700 border border-teal-100 flex-shrink-0">
+          <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
           </svg>
         </div>
-        <div>
-          <span class="text-xs font-medium text-slate-500 uppercase tracking-wider block">Active Templates</span>
+        <div class="min-w-0">
+          <span class="text-[10px] sm:text-xs font-medium text-slate-500 uppercase tracking-wider block truncate">Active Templates</span>
           <div class="flex items-baseline space-x-1.5">
-            <span class="text-xl font-bold text-slate-900" id="metric-templates">24</span>
-            <span class="text-xs text-emerald-600 font-medium">Valid ISO 15223</span>
+            <span class="text-lg sm:text-xl font-bold text-slate-900" id="metric-templates">24</span>
+            <span class="text-[10px] sm:text-xs text-emerald-600 font-medium">ISO 15223</span>
           </div>
         </div>
       </div>
 
       <!-- Metric 2: Compliance Rate -->
-      <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm flex items-center space-x-3.5">
-        <div class="p-2.5 rounded-md bg-emerald-50 text-emerald-600 border border-emerald-100 flex-shrink-0">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="bg-white p-3 sm:p-3.5 rounded-lg border border-slate-200 shadow-sm flex items-center space-x-3">
+        <div class="p-2 sm:p-2.5 rounded-md bg-emerald-50 text-emerald-600 border border-emerald-100 flex-shrink-0">
+          <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
         </div>
-        <div>
-          <span class="text-xs font-medium text-slate-500 uppercase tracking-wider block">Compliance Rate</span>
+        <div class="min-w-0">
+          <span class="text-[10px] sm:text-xs font-medium text-slate-500 uppercase tracking-wider block truncate">Compliance Rate</span>
           <div class="flex items-baseline space-x-1.5">
-            <span class="text-xl font-bold text-emerald-700" id="metric-compliance">99.4%</span>
-            <span class="text-xs text-emerald-600 font-medium">↑ +0.3%</span>
+            <span class="text-lg sm:text-xl font-bold text-emerald-700" id="metric-compliance">99.4%</span>
+            <span class="text-[10px] sm:text-xs text-emerald-600 font-medium">↑ +0.3%</span>
           </div>
         </div>
       </div>
 
       <!-- Metric 3: Pending Approvals -->
-      <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm flex items-center space-x-3.5">
-        <div class="p-2.5 rounded-md bg-amber-50 text-amber-600 border border-amber-100 flex-shrink-0">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="bg-white p-3 sm:p-3.5 rounded-lg border border-slate-200 shadow-sm flex items-center space-x-3">
+        <div class="p-2 sm:p-2.5 rounded-md bg-amber-50 text-amber-600 border border-amber-100 flex-shrink-0">
+          <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
           </svg>
         </div>
-        <div>
-          <span class="text-xs font-medium text-slate-500 uppercase tracking-wider block">Pending Approvals</span>
+        <div class="min-w-0">
+          <span class="text-[10px] sm:text-xs font-medium text-slate-500 uppercase tracking-wider block truncate">Pending Sign-off</span>
           <div class="flex items-baseline space-x-1.5">
-            <span class="text-xl font-bold text-slate-900" id="metric-pending">2</span>
-            <span class="text-xs text-amber-600 font-medium">Part 11 Pending</span>
+            <span class="text-lg sm:text-xl font-bold text-slate-900" id="metric-pending">2</span>
+            <span class="text-[10px] sm:text-xs text-amber-600 font-medium">Part 11</span>
           </div>
         </div>
       </div>
 
       <!-- Metric 4: Audit Status -->
-      <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm flex items-center space-x-3.5">
-        <div class="p-2.5 rounded-md bg-indigo-50 text-indigo-700 border border-indigo-100 flex-shrink-0">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="bg-white p-3 sm:p-3.5 rounded-lg border border-slate-200 shadow-sm flex items-center space-x-3">
+        <div class="p-2 sm:p-2.5 rounded-md bg-indigo-50 text-indigo-700 border border-indigo-100 flex-shrink-0">
+          <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
           </svg>
         </div>
-        <div>
-          <span class="text-xs font-medium text-slate-500 uppercase tracking-wider block">Audit Status</span>
+        <div class="min-w-0">
+          <span class="text-[10px] sm:text-xs font-medium text-slate-500 uppercase tracking-wider block truncate">Audit Status</span>
           <div class="flex items-baseline space-x-1.5">
-            <span class="text-xl font-bold text-indigo-700">SECURE</span>
-            <span class="text-xs text-slate-500 font-mono-code">21 CFR §11</span>
+            <span class="text-lg sm:text-xl font-bold text-indigo-700">SECURE</span>
+            <span class="text-[10px] sm:text-xs text-slate-500 font-mono-code">§11</span>
           </div>
         </div>
       </div>
@@ -222,39 +334,39 @@
   <!-- ==========================================
        MAIN CONTENT CONTAINER
        ========================================== -->
-  <main id="main-content" class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+  <main id="main-content" class="flex-1 max-w-7xl w-full mx-auto p-3 sm:p-6 lg:p-8">
 
     <!-- ====================================================================
          TAB 1: LIVE INTERACTIVE LABEL GENERATOR & SPLIT-SCREEN VISUAL EDITOR
          ==================================================================== -->
-    <div id="tab-generator" class="tab-panel space-y-6">
+    <div id="tab-generator" class="tab-panel space-y-5 sm:space-y-6">
       
       <!-- Top Preset Bar -->
-      <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-3">
-        <div class="flex items-center space-x-3">
-          <label for="template-preset-select" class="text-xs font-bold text-slate-600 uppercase tracking-wider">Quick Device Preset:</label>
-          <select id="template-preset-select" class="bg-slate-50 border border-slate-300 text-slate-800 text-xs sm:text-sm rounded-md px-3 py-1.5 focus:ring-teal-600 focus:border-teal-600 font-medium">
+      <div class="bg-white p-3.5 sm:p-4 rounded-lg border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-3">
+        <div class="flex flex-wrap items-center gap-2">
+          <label for="template-preset-select" class="text-xs font-bold text-slate-600 uppercase tracking-wider">Device Preset:</label>
+          <select id="template-preset-select" class="bg-slate-50 border border-slate-300 text-slate-800 text-xs sm:text-sm rounded-md px-2.5 py-1.5 focus:ring-teal-600 focus:border-teal-600 font-medium max-w-[260px] sm:max-w-none truncate">
             <option value="infusion-pump">Infusion Pump Model X (Class IIb — Active Device)</option>
             <option value="coronary-stent">Drug-Eluting Coronary Stent (Class III — Implantable)</option>
             <option value="surgical-scalpel">Disposable Surgical Scalpel #11 (Class I — Sterile)</option>
-            <option value="dialysis-line">Hemodialysis Blood Line Set (Class IIa — In-Vitro/Fluid Path)</option>
+            <option value="dialysis-line">Hemodialysis Blood Line Set (Class IIa — Fluid Path)</option>
           </select>
         </div>
         <div class="flex items-center space-x-2">
-          <span class="text-xs text-slate-500">Packaging Format:</span>
+          <span class="text-xs text-slate-500 hidden sm:inline">Format:</span>
           <select id="label-size-select" class="bg-slate-50 border border-slate-300 text-slate-800 text-xs rounded-md px-2 py-1 font-medium">
-            <option value="4x6">4" x 6" Shipper / Outer Carton</option>
-            <option value="4x2">4" x 2" Primary Sterile Barrier Pouch</option>
+            <option value="4x6">4" x 6" Outer Carton</option>
+            <option value="4x2">4" x 2" Sterile Pouch</option>
           </select>
-          <button id="reset-defaults-btn" type="button" class="text-xs text-slate-500 hover:text-slate-800 underline ml-2">Reset</button>
+          <button id="reset-defaults-btn" type="button" class="text-xs text-slate-500 hover:text-slate-800 underline ml-1">Reset</button>
         </div>
       </div>
 
       <!-- Split Screen Layout -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
         
         <!-- LEFT COLUMN: Input Form & Regulatory Controls -->
-        <div id="left-form-column" class="lg:col-span-6 space-y-6">
+        <div id="left-form-column" class="lg:col-span-6 space-y-5">
           <div class="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
             
             <div class="bg-slate-50/80 px-4 py-3 border-b border-slate-200 flex items-center justify-between">
@@ -262,7 +374,7 @@
                 <span class="w-2.5 h-2.5 rounded-full bg-teal-600"></span>
                 <h2 class="text-sm font-semibold text-slate-900">Device Specification & Regulatory Data</h2>
               </div>
-              <span class="text-[11px] font-mono-code text-teal-800 bg-teal-50 border border-teal-200 px-2 py-0.5 rounded">FDA 21 CFR §801 Form</span>
+              <span class="text-[10px] sm:text-[11px] font-mono-code text-teal-800 bg-teal-50 border border-teal-200 px-2 py-0.5 rounded">FDA 21 CFR §801</span>
             </div>
 
             <form id="label-generator-form" class="p-4 sm:p-5 space-y-4" onsubmit="return false;">
@@ -294,7 +406,7 @@
               <div>
                 <div class="flex items-center justify-between mb-1">
                   <label for="input-udi-gtin" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider">GS1 UDI Device Identifier (GTIN-14) *</label>
-                  <button type="button" id="calc-gtin-check-btn" class="text-[11px] text-teal-700 hover:text-teal-800 font-medium">Verify GTIN-14 Checksum</button>
+                  <button type="button" id="calc-gtin-check-btn" class="text-[11px] text-teal-700 hover:text-teal-800 font-medium">Verify Checksum</button>
                 </div>
                 <div class="relative">
                   <input type="text" id="input-udi-gtin" maxlength="14" value="00845921004123" class="w-full bg-white border border-slate-300 rounded-md px-3 py-2 text-sm font-mono-code text-slate-900 focus:ring-2 focus:ring-teal-600 focus:border-teal-600 tracking-wider">
@@ -303,7 +415,7 @@
                     Valid DI
                   </span>
                 </div>
-                <p class="text-[11px] text-slate-500 mt-1">Application Identifier (01) — 14-digit Global Trade Item Number for FDA GUDID & EUDAMED.</p>
+                <p class="text-[10px] sm:text-[11px] text-slate-500 mt-1">Application Identifier (01) — 14-digit Global Trade Item Number for FDA GUDID, EUDAMED & CDSCO.</p>
               </div>
 
               <!-- Lot Number & Serial Number -->
@@ -321,11 +433,11 @@
               <!-- Dates: Manufacturing & Expiry -->
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label for="input-mfg-date" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">Manufacturing Date (ISO)</label>
+                  <label for="input-mfg-date" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">Manufacturing Date</label>
                   <input type="date" id="input-mfg-date" value="2026-10-15" class="w-full bg-white border border-slate-300 rounded-md px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-teal-600">
                 </div>
                 <div>
-                  <label for="input-exp-date" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">Expiry Date (AI 17: YYMMDD) *</label>
+                  <label for="input-exp-date" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">Expiry Date (AI 17) *</label>
                   <input type="date" id="input-exp-date" value="2028-10-31" class="w-full bg-white border border-slate-300 rounded-md px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-teal-600">
                 </div>
               </div>
@@ -374,7 +486,7 @@
 
                   <label class="symbol-checkbox-pill flex items-center space-x-2 border border-slate-200 rounded p-2 bg-slate-50/50 hover:bg-slate-100 transition">
                     <input type="checkbox" id="sym-temp" checked class="rounded text-teal-700 focus:ring-teal-600">
-                    <span class="font-medium text-slate-800">5°C – 25°C Limit</span>
+                    <span class="font-medium text-slate-800">5°C–25°C Limit</span>
                   </label>
 
                   <label class="symbol-checkbox-pill flex items-center space-x-2 border border-slate-200 rounded p-2 bg-slate-50/50 hover:bg-slate-100 transition">
@@ -411,74 +523,74 @@
         <!-- RIGHT COLUMN: Real-Time Live Visual Label Preview -->
         <div id="right-preview-column" class="lg:col-span-6 space-y-4">
           
-          <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-4">
+          <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-3.5 sm:p-4">
             
             <!-- Preview Controls Bar -->
             <div class="no-print flex flex-wrap items-center justify-between pb-3 mb-3 border-b border-slate-200 gap-2">
               <div class="flex items-center space-x-2">
                 <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
                   <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span>
-                  WYSIWYG 300 DPI Live Preview
+                  WYSIWYG 300 DPI Preview
                 </span>
-                <span id="target-market-indicator" class="text-xs font-medium text-slate-500">Language: <strong>EN (US)</strong></span>
+                <span id="target-market-indicator" class="text-xs font-medium text-slate-500">Market: <strong>🇺🇸 EN (US)</strong></span>
               </div>
-              <div class="flex items-center space-x-2">
+              <div class="flex items-center space-x-1.5">
                 <button id="copy-udi-string-btn" type="button" class="text-xs px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition" title="Copy Raw UDI HRI String">
                   Copy UDI
                 </button>
                 <button id="download-svg-btn" type="button" class="text-xs px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition" title="Export Label in SVG Vector Format">
-                  Export SVG
+                  SVG
                 </button>
               </div>
             </div>
 
             <!-- PHYSICAL MEDICAL DEVICE LABEL BOX -->
-            <div id="physical-label-container" class="medical-physical-label label-4x6 p-5 sm:p-6 rounded-sm bg-white relative">
+            <div id="physical-label-container" class="medical-physical-label label-4x6 p-4 sm:p-6 rounded-sm bg-white relative">
               <div class="label-peel-corner"></div>
 
               <!-- Top Row: Device Name, Class & Notified Body -->
-              <div class="border-b-2 border-black pb-3">
+              <div class="border-b-2 border-black pb-2.5">
                 <div class="flex items-start justify-between">
                   <div>
-                    <h1 id="preview-device-name" class="text-xl sm:text-2xl font-black tracking-tight text-black uppercase leading-tight">Infusion Pump Model X</h1>
-                    <p id="preview-device-desc" class="text-xs font-bold text-black mt-0.5">HIGH PRECISION VOLUMETRIC INFUSION DEVICE · CLASS IIb</p>
+                    <h1 id="preview-device-name" class="text-lg sm:text-2xl font-black tracking-tight text-black uppercase leading-tight">Infusion Pump Model X</h1>
+                    <p id="preview-device-desc" class="text-[10px] sm:text-xs font-bold text-black mt-0.5">HIGH PRECISION VOLUMETRIC INFUSION DEVICE · CLASS IIb</p>
                   </div>
                   <div class="text-right flex flex-col items-end flex-shrink-0 ml-2">
-                    <span id="preview-ce-container" class="inline-flex items-center font-black text-lg tracking-tighter border border-black px-1.5 py-0.5 leading-none">
+                    <span id="preview-ce-container" class="inline-flex items-center font-black text-base sm:text-lg tracking-tighter border border-black px-1.5 py-0.5 leading-none">
                       CE <span class="text-xs font-bold ml-1">0123</span>
                     </span>
-                    <span id="preview-md-symbol" class="iso-box mt-1 text-[10px]">MD</span>
+                    <span id="preview-md-symbol" class="iso-box mt-1 text-[9px] sm:text-[10px]">MD</span>
                   </div>
                 </div>
               </div>
 
               <!-- Middle Section: REF, LOT, SN, DATES -->
-              <div class="grid grid-cols-2 gap-3 py-3 border-b-2 border-black text-xs">
-                <div class="space-y-1.5">
-                  <div class="flex items-center space-x-2">
+              <div class="grid grid-cols-2 gap-2 sm:gap-3 py-2.5 border-b-2 border-black text-[11px] sm:text-xs">
+                <div class="space-y-1 sm:space-y-1.5">
+                  <div class="flex items-center space-x-1.5">
                     <span class="iso-box">REF</span>
-                    <span id="preview-ref-code" class="font-black font-mono-code text-sm">REF-9842-TX</span>
+                    <span id="preview-ref-code" class="font-black font-mono-code text-xs sm:text-sm">REF-9842-TX</span>
                   </div>
-                  <div class="flex items-center space-x-2">
+                  <div class="flex items-center space-x-1.5">
                     <span class="iso-box">LOT</span>
                     <span id="preview-lot-code" class="font-bold font-mono-code">LOT-202610A</span>
                   </div>
-                  <div class="flex items-center space-x-2">
+                  <div class="flex items-center space-x-1.5">
                     <span class="iso-box">SN</span>
                     <span id="preview-sn-code" class="font-bold font-mono-code">SN-849204</span>
                   </div>
                 </div>
                 
-                <div class="space-y-1.5">
-                  <div class="flex items-center space-x-2">
+                <div class="space-y-1 sm:space-y-1.5">
+                  <div class="flex items-center space-x-1.5">
                     <span class="iso-box" title="Date of Manufacture">🏭 MFG</span>
                     <span id="preview-mfg-date" class="font-bold font-mono-code">2026-10-15</span>
                   </div>
-                  <div class="flex items-center space-x-2">
+                  <div class="flex items-center space-x-1.5">
                     <span class="iso-box bg-black text-white" title="Use-by Date">⌛ EXP</span>
-                    <span id="preview-exp-date" class="font-black font-mono-code text-sm">2028-10-31</span>
+                    <span id="preview-exp-date" class="font-black font-mono-code text-xs sm:text-sm">2028-10-31</span>
                   </div>
-                  <div class="flex items-center space-x-2">
+                  <div class="flex items-center space-x-1.5">
                     <span class="iso-box" title="Quantity">QTY</span>
                     <span class="font-bold">1 EA</span>
                   </div>
@@ -486,58 +598,58 @@
               </div>
 
               <!-- ISO Harmonized Symbols Grid -->
-              <div id="preview-iso-symbols-grid" class="flex flex-wrap gap-2 py-3 border-b-2 border-black items-center">
+              <div id="preview-iso-symbols-grid" class="flex flex-wrap gap-1.5 sm:gap-2 py-2.5 border-b-2 border-black items-center">
                 
                 <!-- Sterile EO -->
                 <div id="badge-sym-sterile" class="iso-icon-cell" title="Sterilized using ethylene oxide (ISO 7000-2499)">
-                  <span class="text-[9px] font-black border border-black px-1 leading-tight">STERILE</span>
-                  <span class="text-[8px] font-bold">EO</span>
+                  <span class="text-[8px] sm:text-[9px] font-black border border-black px-1 leading-tight">STERILE</span>
+                  <span class="text-[7px] sm:text-[8px] font-bold">EO</span>
                 </div>
 
                 <!-- Single Use (Do Not Re-use) -->
                 <div id="badge-sym-singleuse" class="iso-icon-cell" title="Do not re-use / Single use only (ISO 7000-1051)">
-                  <svg viewBox="0 0 24 24" class="w-6 h-6 stroke-[2.5]"><circle cx="12" cy="12" r="10"></circle><text x="8" y="16" font-size="12" font-weight="900" fill="#000" stroke="none">2</text><line x1="4" y1="4" x2="20" y2="20"></line></svg>
+                  <svg viewBox="0 0 24 24" class="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]"><circle cx="12" cy="12" r="10"></circle><text x="8" y="16" font-size="12" font-weight="900" fill="#000" stroke="none">2</text><line x1="4" y1="4" x2="20" y2="20"></line></svg>
                 </div>
 
                 <!-- Keep Dry -->
                 <div id="badge-sym-keepdry" class="iso-icon-cell" title="Keep dry (ISO 7000-0626)">
-                  <svg viewBox="0 0 24 24" class="w-6 h-6 stroke-[2]"><path d="M12 3a9 9 0 0 0-9 9h18a9 9 0 0 0-9-9z"></path><line x1="12" y1="12" x2="12" y2="19"></line><path d="M12 19a2 2 0 1 1-4 0"></path></svg>
+                  <svg viewBox="0 0 24 24" class="w-5 h-5 sm:w-6 sm:h-6 stroke-[2]"><path d="M12 3a9 9 0 0 0-9 9h18a9 9 0 0 0-9-9z"></path><line x1="12" y1="12" x2="12" y2="19"></line><path d="M12 19a2 2 0 1 1-4 0"></path></svg>
                 </div>
 
                 <!-- Temperature Limits -->
                 <div id="badge-sym-temp" class="iso-icon-cell" title="Temperature Limit 5°C - 25°C (ISO 7000-0632)">
-                  <span class="text-[8px] font-black leading-tight text-center">5°C<br>↕<br>25°C</span>
+                  <span class="text-[7px] sm:text-[8px] font-black leading-tight text-center">5°C<br>↕<br>25°C</span>
                 </div>
 
                 <!-- Consult IFU -->
                 <div id="badge-sym-ifu" class="iso-icon-cell" title="Consult instructions for use (ISO 7000-1641)">
-                  <span class="text-[10px] font-bold">📖 i</span>
+                  <span class="text-[9px] sm:text-[10px] font-bold">📖 i</span>
                 </div>
 
                 <!-- Latex Free -->
-                <div id="badge-sym-latex" class="iso-box text-[9px] py-1" title="Does not contain natural rubber latex">
+                <div id="badge-sym-latex" class="iso-box text-[8px] sm:text-[9px] py-0.5 sm:py-1" title="Does not contain natural rubber latex">
                   LATEX FREE
                 </div>
 
                 <!-- Rx Only -->
-                <div id="badge-sym-rx" class="iso-box text-[9px] py-1 font-black bg-black text-white" title="Caution: Federal law restricts this device to sale by or on order of a physician">
+                <div id="badge-sym-rx" class="iso-box text-[8px] sm:text-[9px] py-0.5 sm:py-1 font-black bg-black text-white" title="Caution: Federal law restricts this device to sale by or on order of a physician">
                   Rx ONLY
                 </div>
 
               </div>
 
               <!-- Manufacturer & EC REP Addresses -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 py-2 border-b-2 border-black text-[10px] leading-tight">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 py-2 border-b-2 border-black text-[9px] sm:text-[10px] leading-tight">
                 <div>
                   <span class="font-black flex items-center">
-                    <span class="iso-box mr-1 text-[8px] py-0">🏭 MFR</span>
+                    <span class="iso-box mr-1 text-[7px] sm:text-[8px] py-0">🏭 MFR</span>
                     Legal Manufacturer:
                   </span>
                   <p id="preview-mfr-name" class="font-medium text-black mt-0.5">Tata Medical Devices Inc., Bangalore Bio-Park, India</p>
                 </div>
                 <div>
                   <span class="font-black flex items-center">
-                    <span class="iso-box mr-1 text-[8px] py-0">EC | REP</span>
+                    <span class="iso-box mr-1 text-[7px] sm:text-[8px] py-0">EC | REP</span>
                     EU Authorized Rep:
                   </span>
                   <p id="preview-ecrep-name" class="font-medium text-black mt-0.5">MedTech Solutions GmbH, Kurfürstendamm 142, Berlin, Germany</p>
@@ -545,18 +657,18 @@
               </div>
 
               <!-- Localized Safety & Warning Statements -->
-              <div class="py-2 border-b-2 border-black text-[10px] leading-tight">
+              <div class="py-2 border-b-2 border-black text-[9px] sm:text-[10px] leading-tight">
                 <span class="font-black uppercase tracking-wide">Caution & Safe Handling:</span>
-                <p id="preview-warning-text" class="font-semibold text-black mt-0.5">CAUTION: Federal Law (USA) restricts this device to sale by or on the order of a licensed physician. Do not use if package is opened or damaged.</p>
+                <p id="preview-warning-text" class="font-semibold text-black mt-0.5 transition-all duration-200">CAUTION: Federal Law (USA) restricts this device to sale by or on the order of a licensed physician. Do not use if package is opened or damaged.</p>
               </div>
 
               <!-- BARCODE & UDI REGION (GS1-128 & GS1 DataMatrix) -->
-              <div class="pt-3">
-                <div class="flex items-center space-x-3">
+              <div class="pt-2.5">
+                <div class="flex items-center space-x-2 sm:space-x-3">
                   
                   <!-- 2D GS1 DataMatrix ECC200 Box -->
                   <div class="datamatrix-box flex-shrink-0" title="2D GS1 DataMatrix ECC200 Machine-Readable Carrier">
-                    <canvas id="datamatrix-canvas" width="60" height="60" class="w-[58px] h-[58px]"></canvas>
+                    <canvas id="datamatrix-canvas" width="60" height="60" class="w-[50px] h-[50px] sm:w-[58px] sm:h-[58px]"></canvas>
                   </div>
 
                   <!-- 1D GS1-128 Linear Barcode with Human Readable Interpretation -->
@@ -564,7 +676,7 @@
                     <div id="barcode-svg-container" class="w-full">
                       <!-- Dynamically Generated SVG Barcode Stripes -->
                     </div>
-                    <div id="preview-udi-hri" class="text-[10px] font-mono-code font-bold tracking-tight text-center mt-1 text-black select-all">
+                    <div id="preview-udi-hri" class="text-[9px] sm:text-[10px] font-mono-code font-bold tracking-tight text-center mt-1 text-black select-all truncate">
                       (01)00845921004123(17)281031(10)LOT-202610A(21)SN-849204
                     </div>
                   </div>
@@ -572,9 +684,9 @@
                 </div>
 
                 <!-- FDA UDI Pure String -->
-                <div class="mt-2 text-[9px] font-mono-code text-slate-800 bg-slate-100 p-1 rounded border border-slate-300 flex items-center justify-between">
+                <div class="mt-2 text-[8px] sm:text-[9px] font-mono-code text-slate-800 bg-slate-100 p-1 rounded border border-slate-300 flex items-center justify-between">
                   <span class="truncate">UDI: <strong>=+/00845921004123=17281031=10LOT-202610A=21SN-849204</strong></span>
-                  <span class="text-[8px] bg-slate-200 px-1 rounded font-bold uppercase ml-1">FDA Part 830</span>
+                  <span class="text-[7px] sm:text-[8px] bg-slate-200 px-1 rounded font-bold uppercase ml-1 flex-shrink-0">FDA Part 830</span>
                 </div>
               </div>
 
@@ -582,7 +694,7 @@
 
             <!-- Print / Compliance Notice -->
             <div class="mt-3 text-center text-xs text-slate-500">
-              <span>All elements conform to ISO 15223-1:2021 & GS1 General Healthcare Specifications.</span>
+              <span>All elements conform to ISO 15223-1:2021, CDSCO India & GS1 Healthcare Specifications.</span>
             </div>
 
           </div>
@@ -596,21 +708,21 @@
     <!-- ====================================================================
          TAB 2: INSTANT AI COMPLIANCE AUDITOR MODULE
          ==================================================================== -->
-    <div id="tab-auditor" class="tab-panel hidden space-y-6">
+    <div id="tab-auditor" class="tab-panel hidden space-y-5 sm:space-y-6">
       
       <!-- Auditor Header Banner -->
-      <div class="bg-white p-6 rounded-lg border border-slate-200 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div class="bg-white p-5 sm:p-6 rounded-lg border border-slate-200 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
           <div class="flex items-center space-x-2">
             <span class="px-2 py-0.5 rounded-full text-xs font-bold bg-teal-100 text-teal-800 uppercase tracking-wider">Automated Regulatory Agent</span>
-            <span class="text-xs text-slate-500 font-mono-code">ISO 15223-1 · FDA 21 CFR 801 · EU MDR GSPR 23</span>
+            <span class="text-xs text-slate-500 font-mono-code hidden sm:inline">ISO 15223-1 · FDA 21 CFR 801 · EU MDR · CDSCO</span>
           </div>
-          <h2 class="text-xl font-bold text-slate-900 mt-1">Real-Time Medical Label Compliance Auditor</h2>
-          <p class="text-sm text-slate-600 mt-1">Instant algorithmic heuristic & regulatory rule engine scanning barcodes, date logic, symbol harmonizations, and liability warnings.</p>
+          <h2 class="text-lg sm:text-xl font-bold text-slate-900 mt-1">Real-Time Medical Label Compliance Auditor</h2>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1">Instant algorithmic heuristic & regulatory rule engine scanning barcodes, date logic, symbol harmonizations, and liability warnings.</p>
         </div>
 
         <div class="flex items-center space-x-3 w-full md:w-auto">
-          <button id="run-ai-scan-main-btn" type="button" class="w-full md:w-auto inline-flex items-center justify-center px-5 py-2.5 rounded-md shadow-sm text-sm font-semibold text-white bg-teal-700 hover:bg-teal-800 transition">
+          <button id="run-ai-scan-main-btn" type="button" class="w-full md:w-auto inline-flex items-center justify-center px-4 sm:px-5 py-2.5 rounded-md shadow-sm text-sm font-semibold text-white bg-teal-700 hover:bg-teal-800 transition">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
             </svg>
@@ -620,12 +732,12 @@
       </div>
 
       <!-- Scanning Progress Area (Animated during scan) -->
-      <div id="scanning-progress-box" class="hidden bg-slate-900 text-white p-6 rounded-lg shadow-md relative overflow-hidden">
+      <div id="scanning-progress-box" class="hidden bg-slate-900 text-white p-5 sm:p-6 rounded-lg shadow-md relative overflow-hidden">
         <div class="scanner-beam"></div>
         <div class="flex items-center justify-between mb-4">
-          <div class="flex items-center space-x-3">
+          <div class="flex items-center space-x-2 sm:space-x-3">
             <div class="w-3 h-3 rounded-full bg-teal-400 animate-ping"></div>
-            <h3 class="text-sm font-bold tracking-wide uppercase text-teal-300">MedLabel Neural Regulatory Engine Scanning...</h3>
+            <h3 class="text-xs sm:text-sm font-bold tracking-wide uppercase text-teal-300">MedLabel Neural Regulatory Engine Scanning...</h3>
           </div>
           <span id="scan-percentage-text" class="text-xs font-mono-code text-teal-400">0%</span>
         </div>
@@ -637,96 +749,96 @@
         <ul class="text-xs space-y-2 font-mono-code text-slate-300" id="scan-steps-list">
           <li class="flex items-center text-teal-300" id="step-udi"><span class="mr-2">⚙</span> [1/5] Verifying FDA 21 CFR Part 801 UDI GTIN-14 Checksum & Application Identifiers...</li>
           <li class="flex items-center text-slate-500" id="step-iso"><span class="mr-2">⏳</span> [2/5] Cross-checking ISO 15223-1:2021 Graphic Symbol Harmonization...</li>
-          <li class="flex items-center text-slate-500" id="step-mdr"><span class="mr-2">⏳</span> [3/5] Validating EU MDR 2017/745 Annex I GSPR 23 Label Completeness...</li>
+          <li class="flex items-center text-slate-500" id="step-mdr"><span class="mr-2">⏳</span> [3/5] Validating EU MDR 2017/745 Annex I GSPR 23 & CDSCO Completeness...</li>
           <li class="flex items-center text-slate-500" id="step-dates"><span class="mr-2">⏳</span> [4/5] Computing Shelf Life & Manufacturing Chronology Integrity...</li>
-          <li class="flex items-center text-slate-500" id="step-warnings"><span class="mr-2">⏳</span> [5/5] Analyzing Multilingual Cautionary Safety Risk Language...</li>
+          <li class="flex items-center text-slate-500" id="step-warnings"><span class="mr-2">⏳</span> [5/5] Analyzing Multilingual Cautionary Safety Risk Language (EN/HI/TE/DE/FR/ES)...</li>
         </ul>
       </div>
 
       <!-- Compliance Audit Report Card -->
-      <div id="compliance-report-card" class="bg-white rounded-lg border border-slate-200 shadow-sm p-6 space-y-6">
+      <div id="compliance-report-card" class="bg-white rounded-lg border border-slate-200 shadow-sm p-5 sm:p-6 space-y-5 sm:space-y-6">
         
         <!-- Score Header -->
-        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 border-b border-slate-200 gap-4">
-          <div class="flex items-center space-x-4">
-            <div class="w-16 h-16 rounded-xl bg-emerald-50 border-2 border-emerald-500 flex flex-col items-center justify-center text-emerald-700 shadow-sm">
-              <span class="text-xl font-black leading-none" id="audit-score-num">98%</span>
-              <span class="text-[10px] font-bold uppercase tracking-wider mt-0.5">SCORE</span>
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-5 border-b border-slate-200 gap-4">
+          <div class="flex items-center space-x-3.5 sm:space-x-4">
+            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-emerald-50 border-2 border-emerald-500 flex flex-col items-center justify-center text-emerald-700 shadow-sm flex-shrink-0">
+              <span class="text-lg sm:text-xl font-black leading-none" id="audit-score-num">98%</span>
+              <span class="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider mt-0.5">SCORE</span>
             </div>
             <div>
-              <div class="flex items-center space-x-2">
-                <span class="text-lg font-bold text-slate-900" id="audit-verdict-title">Regulatory Verification: PASSED</span>
-                <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2 py-0.5 rounded-full border border-emerald-300">Grade A+</span>
+              <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                <span class="text-base sm:text-lg font-bold text-slate-900" id="audit-verdict-title">Regulatory Verification: PASSED</span>
+                <span class="bg-emerald-100 text-emerald-800 text-[10px] sm:text-xs font-bold px-2 py-0.5 rounded-full border border-emerald-300">Grade A+</span>
               </div>
-              <p class="text-xs text-slate-500 mt-0.5" id="audit-verdict-subtitle">Fully compliant for US FDA 510(k)/PMA Commercial Distribution & EU MDR CE Submission.</p>
+              <p class="text-xs text-slate-500 mt-0.5" id="audit-verdict-subtitle">Fully compliant for US FDA 510(k)/PMA Commercial Distribution, EU MDR CE & CDSCO India Release.</p>
             </div>
           </div>
 
           <div class="flex items-center space-x-2">
             <button id="download-audit-cert-btn" type="button" class="inline-flex items-center px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded border border-slate-300 transition">
               <svg class="w-4 h-4 mr-1 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-              Export Certificate (.JSON)
+              Export JSON
             </button>
             <button id="remediate-warnings-btn" type="button" class="inline-flex items-center px-3 py-1.5 text-xs font-semibold text-teal-800 bg-teal-50 hover:bg-teal-100 rounded border border-teal-300 transition">
-              Auto-Remediate
+              Auto-Fix
             </button>
           </div>
         </div>
 
         <!-- Verification Checklist Breakdown Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="audit-checks-container">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4" id="audit-checks-container">
           
           <!-- Item 1: ISO 15223-1 -->
-          <div class="p-4 rounded-lg border border-emerald-200 bg-emerald-50/30 flex items-start space-x-3">
-            <div class="p-1 rounded bg-emerald-100 text-emerald-700 mt-0.5">
+          <div class="p-3.5 sm:p-4 rounded-lg border border-emerald-200 bg-emerald-50/30 flex items-start space-x-3">
+            <div class="p-1 rounded bg-emerald-100 text-emerald-700 mt-0.5 flex-shrink-0">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
             </div>
-            <div class="flex-1">
+            <div class="flex-1 min-w-0">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-bold text-slate-900 uppercase tracking-wide">ISO 15223-1:2021 Symbol Harmonization</span>
-                <span class="badge-emerald px-2 py-0.5 rounded text-[11px] font-bold">PASSED</span>
+                <span class="badge-emerald px-2 py-0.5 rounded text-[10px] sm:text-[11px] font-bold">PASSED</span>
               </div>
               <p class="text-xs text-slate-600 mt-1">Symbols for Sterile, Single Use, Keep Dry, and Temperature Limits match standard aspect ratios and dimensions.</p>
             </div>
           </div>
 
           <!-- Item 2: FDA Part 801 UDI -->
-          <div class="p-4 rounded-lg border border-emerald-200 bg-emerald-50/30 flex items-start space-x-3">
-            <div class="p-1 rounded bg-emerald-100 text-emerald-700 mt-0.5">
+          <div class="p-3.5 sm:p-4 rounded-lg border border-emerald-200 bg-emerald-50/30 flex items-start space-x-3">
+            <div class="p-1 rounded bg-emerald-100 text-emerald-700 mt-0.5 flex-shrink-0">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
             </div>
-            <div class="flex-1">
+            <div class="flex-1 min-w-0">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-slate-900 uppercase tracking-wide">FDA 21 CFR Part 801 UDI Syntax</span>
-                <span class="badge-emerald px-2 py-0.5 rounded text-[11px] font-bold">VALIDATED</span>
+                <span class="text-xs font-bold text-slate-900 uppercase tracking-wide">FDA Part 801 & CDSCO UDI Syntax</span>
+                <span class="badge-emerald px-2 py-0.5 rounded text-[10px] sm:text-[11px] font-bold">VALIDATED</span>
               </div>
-              <p class="text-xs text-slate-600 mt-1">Device Identifier GTIN-14 check digit (3) verified via modulo 10 algorithm. Production Identifiers (17, 10, 21) properly delimited.</p>
+              <p class="text-xs text-slate-600 mt-1">Device Identifier GTIN-14 check digit verified via modulo 10 algorithm. Production Identifiers (17, 10, 21) properly delimited.</p>
             </div>
           </div>
 
           <!-- Item 3: EU MDR 2017/745 GSPR 23 -->
-          <div class="p-4 rounded-lg border border-emerald-200 bg-emerald-50/30 flex items-start space-x-3">
-            <div class="p-1 rounded bg-emerald-100 text-emerald-700 mt-0.5">
+          <div class="p-3.5 sm:p-4 rounded-lg border border-emerald-200 bg-emerald-50/30 flex items-start space-x-3">
+            <div class="p-1 rounded bg-emerald-100 text-emerald-700 mt-0.5 flex-shrink-0">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
             </div>
-            <div class="flex-1">
+            <div class="flex-1 min-w-0">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-bold text-slate-900 uppercase tracking-wide">EU MDR 2017/745 GSPR 23</span>
-                <span class="badge-emerald px-2 py-0.5 rounded text-[11px] font-bold">COMPLIANT</span>
+                <span class="badge-emerald px-2 py-0.5 rounded text-[10px] sm:text-[11px] font-bold">COMPLIANT</span>
               </div>
               <p class="text-xs text-slate-600 mt-1">Authorized European Representative [EC REP] stated with address. Notified Body identification code CE 0123 affixed.</p>
             </div>
           </div>
 
           <!-- Item 4: Expiration & Shelf-Life Validity -->
-          <div class="p-4 rounded-lg border border-emerald-200 bg-emerald-50/30 flex items-start space-x-3">
-            <div class="p-1 rounded bg-emerald-100 text-emerald-700 mt-0.5">
+          <div class="p-3.5 sm:p-4 rounded-lg border border-emerald-200 bg-emerald-50/30 flex items-start space-x-3">
+            <div class="p-1 rounded bg-emerald-100 text-emerald-700 mt-0.5 flex-shrink-0">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
             </div>
-            <div class="flex-1">
+            <div class="flex-1 min-w-0">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-bold text-slate-900 uppercase tracking-wide">Shelf-Life & Date Chronology</span>
-                <span class="badge-emerald px-2 py-0.5 rounded text-[11px] font-bold">PASSED</span>
+                <span class="badge-emerald px-2 py-0.5 rounded text-[10px] sm:text-[11px] font-bold">PASSED</span>
               </div>
               <p class="text-xs text-slate-600 mt-1">Expiry date is 24 months post-manufacture. No past-expiration or negative shelf life flags detected.</p>
             </div>
@@ -735,13 +847,13 @@
         </div>
 
         <!-- AI Advisory & Recommendations Notice -->
-        <div class="p-4 rounded-lg border border-amber-200 bg-amber-50/50 flex items-start space-x-3 text-xs">
+        <div class="p-3.5 sm:p-4 rounded-lg border border-amber-200 bg-amber-50/50 flex items-start space-x-3 text-xs">
           <div class="p-1 rounded bg-amber-100 text-amber-700 mt-0.5 flex-shrink-0">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
           </div>
           <div>
-            <span class="font-bold text-amber-900">AI Regulatory Advisory Note:</span>
-            <p class="text-amber-800 mt-0.5">If distributing within the European Union member states (Germany, France, Spain), GSPR 23.1 requires cautionary warnings to be provided in the official national languages. Use the <strong>Global Localization</strong> module to review translated warning text before sign-off.</p>
+            <span class="font-bold text-amber-900">Regulatory Advisory Note:</span>
+            <p class="text-amber-800 mt-0.5">Use the <strong>3-dots multi-language selector</strong> in the navigation header to verify translated cautionary warnings for target export markets (including 🇮🇳 <strong>Hindi/Telugu</strong> for Indian healthcare and 🇪🇺 <strong>German/French/Spanish</strong> for EU MDR distribution).</p>
           </div>
         </div>
 
@@ -752,21 +864,23 @@
     <!-- ====================================================================
          TAB 3: MULTI-MARKET GLOBAL LOCALIZATION
          ==================================================================== -->
-    <div id="tab-localization" class="tab-panel hidden space-y-6">
+    <div id="tab-localization" class="tab-panel hidden space-y-5 sm:space-y-6">
       
-      <div class="bg-white p-6 rounded-lg border border-slate-200 shadow-sm">
+      <div class="bg-white p-5 sm:p-6 rounded-lg border border-slate-200 shadow-sm">
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 border-b border-slate-200 gap-3">
           <div>
-            <h2 class="text-xl font-bold text-slate-900">Multi-Market Global Localization</h2>
-            <p class="text-sm text-slate-600 mt-0.5">EU MDR Article 10(11) & national health authority translation compliance engine.</p>
+            <h2 class="text-lg sm:text-xl font-bold text-slate-900">Multi-Market Global Localization</h2>
+            <p class="text-xs sm:text-sm text-slate-600 mt-0.5">Supporting US FDA, CDSCO India (Hindi & Telugu), and EU MDR (German, French, Spanish).</p>
           </div>
           
-          <!-- Language Selector Pills -->
-          <div class="flex items-center space-x-2 bg-slate-100 p-1 rounded-lg">
-            <button type="button" data-lang="en" class="lang-switch-btn active px-3 py-1.5 rounded-md text-xs font-bold bg-white text-teal-800 shadow-sm">🇺🇸 English</button>
-            <button type="button" data-lang="de" class="lang-switch-btn px-3 py-1.5 rounded-md text-xs font-bold text-slate-600 hover:text-slate-900">🇩🇪 Deutsch</button>
-            <button type="button" data-lang="fr" class="lang-switch-btn px-3 py-1.5 rounded-md text-xs font-bold text-slate-600 hover:text-slate-900">🇫🇷 Français</button>
-            <button type="button" data-lang="es" class="lang-switch-btn px-3 py-1.5 rounded-md text-xs font-bold text-slate-600 hover:text-slate-900">🇪🇸 Español</button>
+          <!-- Language Selector Pills (Responsive horizontal list) -->
+          <div class="flex items-center flex-wrap gap-1.5 bg-slate-100 p-1.5 rounded-lg max-w-full">
+            <button type="button" data-lang="en" class="lang-switch-btn active px-2.5 py-1 rounded text-xs font-bold bg-white text-teal-800 shadow-sm">🇺🇸 EN</button>
+            <button type="button" data-lang="hi" class="lang-switch-btn px-2.5 py-1 rounded text-xs font-bold text-slate-600 hover:text-slate-900">🇮🇳 हिन्दी</button>
+            <button type="button" data-lang="te" class="lang-switch-btn px-2.5 py-1 rounded text-xs font-bold text-slate-600 hover:text-slate-900">🇮🇳 తెలుగు</button>
+            <button type="button" data-lang="de" class="lang-switch-btn px-2.5 py-1 rounded text-xs font-bold text-slate-600 hover:text-slate-900">🇩🇪 DE</button>
+            <button type="button" data-lang="fr" class="lang-switch-btn px-2.5 py-1 rounded text-xs font-bold text-slate-600 hover:text-slate-900">🇫🇷 FR</button>
+            <button type="button" data-lang="es" class="lang-switch-btn px-2.5 py-1 rounded text-xs font-bold text-slate-600 hover:text-slate-900">🇪🇸 ES</button>
           </div>
         </div>
 
@@ -775,7 +889,7 @@
           <!-- Current Active Language View -->
           <div class="space-y-4">
             <h3 class="text-sm font-bold text-slate-900 flex items-center space-x-2">
-              <span id="active-lang-flag">🇺🇸</span>
+              <span id="active-lang-flag" class="text-lg">🇺🇸</span>
               <span id="active-lang-title">English (United States / FDA Target Market)</span>
             </h3>
 
@@ -801,7 +915,7 @@
               </div>
             </div>
 
-            <button id="apply-translation-to-label-btn" type="button" class="w-full inline-flex items-center justify-center px-4 py-2 rounded-md bg-teal-700 hover:bg-teal-800 text-white text-xs font-semibold shadow-sm transition">
+            <button id="apply-translation-to-label-btn" type="button" class="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-md bg-teal-700 hover:bg-teal-800 text-white text-xs font-semibold shadow-sm transition">
               <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
               Apply Selected Translation to Live Label
             </button>
@@ -809,16 +923,16 @@
 
           <!-- Side-by-Side Multi-Market Regulatory Compliance Matrix -->
           <div class="space-y-4">
-            <h3 class="text-sm font-bold text-slate-900">Harmonized Terminology Validation</h3>
+            <h3 class="text-sm font-bold text-slate-900">Harmonized Terminology Validation (All 6 Markets)</h3>
             
-            <div class="overflow-hidden rounded-lg border border-slate-200">
+            <div class="overflow-x-auto rounded-lg border border-slate-200">
               <table class="min-w-full divide-y divide-slate-200 text-xs">
                 <thead class="bg-slate-50 text-slate-600 font-semibold">
                   <tr>
-                    <th scope="col" class="py-2.5 px-3 text-left">Market</th>
-                    <th scope="col" class="py-2.5 px-3 text-left">Prescription Term</th>
-                    <th scope="col" class="py-2.5 px-3 text-left">Single Use Term</th>
-                    <th scope="col" class="py-2.5 px-3 text-left">Status</th>
+                    <th scope="col" class="py-2 px-3 text-left">Market</th>
+                    <th scope="col" class="py-2 px-3 text-left">Prescription Term</th>
+                    <th scope="col" class="py-2 px-3 text-left">Single Use Term</th>
+                    <th scope="col" class="py-2 px-3 text-left">Status</th>
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100 text-slate-800 font-medium">
@@ -826,6 +940,18 @@
                     <td class="py-2 px-3 font-bold">🇺🇸 EN (US)</td>
                     <td class="py-2 px-3">Rx Only</td>
                     <td class="py-2 px-3">Do Not Re-use</td>
+                    <td class="py-2 px-3 text-emerald-600 font-bold">Validated</td>
+                  </tr>
+                  <tr class="bg-teal-50/40">
+                    <td class="py-2 px-3 font-bold text-teal-900">🇮🇳 HI (India)</td>
+                    <td class="py-2 px-3 font-hindi">केवल पर्चे पर</td>
+                    <td class="py-2 px-3 font-hindi">पुनः उपयोग न करें</td>
+                    <td class="py-2 px-3 text-emerald-600 font-bold">Validated</td>
+                  </tr>
+                  <tr class="bg-teal-50/40">
+                    <td class="py-2 px-3 font-bold text-teal-900">🇮🇳 TE (AP/TS)</td>
+                    <td class="py-2 px-3 font-telugu">ప్రిస్క్రిప్షన్ మాత్రమే</td>
+                    <td class="py-2 px-3 font-telugu">మళ్లీ ఉపయోగించవద్దు</td>
                     <td class="py-2 px-3 text-emerald-600 font-bold">Validated</td>
                   </tr>
                   <tr>
@@ -851,7 +977,7 @@
             </div>
 
             <div class="p-3 rounded bg-slate-50 border border-slate-200 text-[11px] text-slate-600">
-              <strong class="text-slate-800">Regulatory Insight:</strong> ISO 15223-1 symbols reduce translation space requirements by up to 70% on primary packaging while maintaining strict legal compliance across all 27 EU member states.
+              <strong class="text-slate-800">CDSCO & EU MDR Insight:</strong> Standardized ISO 15223-1 symbols minimize translation clutter on packaging while maintaining zero-defect regulatory compliance across multi-regional distribution chains.
             </div>
 
           </div>
@@ -865,16 +991,16 @@
     <!-- ====================================================================
          TAB 4: SECURE FDA 21 CFR PART 11 AUDIT TRAIL LOGS
          ==================================================================== -->
-    <div id="tab-audit-trail" class="tab-panel hidden space-y-6">
+    <div id="tab-audit-trail" class="tab-panel hidden space-y-5 sm:space-y-6">
       
-      <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-6 space-y-4">
+      <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-4 sm:p-6 space-y-4">
         
         <!-- Header & Action Row -->
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 border-b border-slate-200 gap-3">
           <div>
             <div class="flex items-center space-x-2">
-              <h2 class="text-xl font-bold text-slate-900">FDA 21 CFR Part 11 Audit Trail Ledger</h2>
-              <span class="badge-indigo text-[11px] font-mono-code font-bold px-2 py-0.5 rounded">§ 11.10(e) Controls</span>
+              <h2 class="text-lg sm:text-xl font-bold text-slate-900">FDA 21 CFR Part 11 Audit Trail Ledger</h2>
+              <span class="badge-indigo text-[10px] sm:text-[11px] font-mono-code font-bold px-2 py-0.5 rounded">§ 11.10(e) Controls</span>
             </div>
             <p class="text-xs text-slate-500 mt-0.5">Computer-generated, time-stamped, tamper-evident audit trail capturing all system entries, modifications, and electronic signatures.</p>
           </div>
@@ -892,7 +1018,7 @@
         <!-- Filter & Search Toolbar -->
         <div class="flex flex-wrap items-center justify-between gap-3 text-xs">
           <div class="flex items-center space-x-2">
-            <label for="audit-filter-action" class="font-semibold text-slate-600">Filter Action:</label>
+            <label for="audit-filter-action" class="font-semibold text-slate-600">Filter:</label>
             <select id="audit-filter-action" class="bg-slate-50 border border-slate-300 rounded px-2.5 py-1 text-slate-800 font-medium">
               <option value="ALL">All Actions</option>
               <option value="SIGNATURE">Electronic Signatures</option>
@@ -903,20 +1029,20 @@
           </div>
 
           <div class="text-slate-500 font-mono-code text-[11px]">
-            Cryptographic Integrity: <span class="text-emerald-700 font-bold">SHA-256 Validated</span>
+            Integrity: <span class="text-emerald-700 font-bold">SHA-256 Validated</span>
           </div>
         </div>
 
-        <!-- Data Table -->
+        <!-- Data Table (Responsive horizontal scroll) -->
         <div class="overflow-x-auto border border-slate-200 rounded-lg">
           <table class="min-w-full divide-y divide-slate-200 text-left text-xs font-mono-code">
-            <thead class="bg-slate-50 text-slate-600 font-sans font-bold uppercase text-[11px] tracking-wider">
+            <thead class="bg-slate-50 text-slate-600 font-sans font-bold uppercase text-[10px] sm:text-[11px] tracking-wider">
               <tr>
-                <th scope="col" class="py-3 px-4">Timestamp (UTC/IST)</th>
-                <th scope="col" class="py-3 px-4">Operator Name</th>
-                <th scope="col" class="py-3 px-4">Action Performed</th>
-                <th scope="col" class="py-3 px-4">Cryptographic Hash (SHA-256)</th>
-                <th scope="col" class="py-3 px-4">Regulatory Status</th>
+                <th scope="col" class="py-3 px-3 sm:px-4">Timestamp (UTC)</th>
+                <th scope="col" class="py-3 px-3 sm:px-4">Operator Name</th>
+                <th scope="col" class="py-3 px-3 sm:px-4">Action Performed</th>
+                <th scope="col" class="py-3 px-3 sm:px-4">SHA-256 Hash</th>
+                <th scope="col" class="py-3 px-3 sm:px-4">Status</th>
               </tr>
             </thead>
             <tbody id="audit-trail-tbody" class="divide-y divide-slate-100 bg-white text-slate-800">
@@ -926,9 +1052,9 @@
         </div>
 
         <!-- Part 11 Regulatory Compliance Footer -->
-        <div class="bg-slate-50 p-3.5 rounded border border-slate-200 text-[11px] text-slate-600 flex items-center justify-between">
-          <span>This audit ledger is protected against backdating, record deletion, and unauthorized tampering pursuant to 21 CFR Part 11.10(b).</span>
-          <span class="font-bold text-slate-800">Team Creative Mind · TELIPORT Season 4</span>
+        <div class="bg-slate-50 p-3 rounded border border-slate-200 text-[11px] text-slate-600 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <span>Protected against backdating and record deletion pursuant to 21 CFR Part 11.10(b).</span>
+          <span class="font-bold text-slate-800">Team Creative Mind · Lead: Naga Aswith</span>
         </div>
 
       </div>
@@ -938,17 +1064,17 @@
     <!-- ====================================================================
          TAB 5: TELIPORT SEASON 4 CASE STUDY 4 BRIEF & ARCHITECTURE
          ==================================================================== -->
-    <div id="tab-case-study" class="tab-panel hidden space-y-6">
+    <div id="tab-case-study" class="tab-panel hidden space-y-5 sm:space-y-6">
       
-      <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+      <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-5 sm:p-8 space-y-6">
         
         <div class="border-b border-slate-200 pb-5">
           <div class="flex items-center space-x-2">
             <span class="bg-teal-50 text-teal-800 text-xs font-bold px-2.5 py-0.5 rounded-full border border-teal-200">Tata Elxsi TELIPORT Season 4</span>
             <span class="text-xs text-slate-500 font-semibold">Case Study 4: Medical Device Labeling Automation & Compliance</span>
           </div>
-          <h2 class="text-2xl font-black text-slate-900 mt-2">MedLabel.ai Enterprise Architecture</h2>
-          <p class="text-sm text-slate-600 mt-1">End-to-End Medical Device Labeling Automation, ISO 15223-1 Symbol Harmonization & FDA 21 CFR Part 11 Compliance Platform.</p>
+          <h2 class="text-xl sm:text-2xl font-black text-slate-900 mt-2">MedLabel.ai Enterprise Architecture</h2>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1">End-to-End Medical Device Labeling Automation, ISO 15223-1 Symbol Harmonization, 3-Dots Multi-Market Localization & FDA 21 CFR Part 11 Compliance Platform.</p>
         </div>
 
         <!-- Team Attribution Card -->
@@ -956,23 +1082,23 @@
           <div>
             <span class="text-xs font-bold text-teal-900 uppercase tracking-wider block">Presented by Team:</span>
             <span class="text-lg font-black text-teal-950">Creative Mind</span>
-            <span class="text-xs text-teal-800 ml-2">· Vignan's Lara Institute of Technology & Sciences</span>
+            <span class="text-xs text-teal-800 block sm:inline sm:ml-2">· Vignan's Lara Institute of Technology and Science</span>
           </div>
           <div class="text-left sm:text-right">
-            <span class="text-xs text-teal-800 block">Team Lead & Principal Architect:</span>
-            <span class="text-sm font-bold text-teal-950">Aswith</span>
+            <span class="text-xs text-teal-800 block">Team Leader & Principal Architect:</span>
+            <span class="text-sm font-bold text-teal-950">Naga Aswith</span>
           </div>
         </div>
 
         <!-- Problem Statement & Solution Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
           <div class="space-y-2">
             <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wide flex items-center">
               <span class="w-2 h-2 rounded-full bg-rose-500 mr-2"></span>
               The MedTech Industry Problem
             </h3>
             <p class="text-xs text-slate-600 leading-relaxed">
-              Medical device labeling errors cause over <strong>40% of all FDA and EU MDR medical recalls</strong>. Disjointed workflows, manual copy-pasting across multilingual packaging, non-compliant UDI barcodes, and improper ISO symbols result in costly regulatory freezes, customs quarantine, and patient safety hazards.
+              Medical device labeling errors cause over <strong>40% of all FDA, EU MDR, and CDSCO medical recalls</strong>. Disjointed workflows, manual copy-pasting across multilingual packaging, non-compliant UDI barcodes, and improper ISO symbols result in costly regulatory freezes, customs quarantine, and patient safety hazards.
             </p>
           </div>
 
@@ -982,7 +1108,7 @@
               The MedLabel.ai Solution
             </h3>
             <p class="text-xs text-slate-600 leading-relaxed">
-              MedLabel.ai provides a unified, automated, audit-ready platform that merges algorithmic UDI-DI generation (GS1 GTIN-14 check digits), instant AI regulatory scanning (FDA 21 CFR 801, EU MDR Annex I), multi-market localization, and immutable FDA 21 CFR Part 11 audit trails with cryptographic digital signatures.
+              MedLabel.ai provides a unified, automated, audit-ready platform that merges algorithmic UDI-DI generation (GS1 GTIN-14 check digits), instant AI regulatory scanning (FDA 21 CFR 801, EU MDR Annex I), 3-dots multi-market localization (including <strong>Hindi & Telugu</strong>), and immutable FDA 21 CFR Part 11 audit trails with cryptographic digital signatures.
             </p>
           </div>
         </div>
@@ -990,16 +1116,16 @@
         <!-- Architecture Stack -->
         <div class="space-y-3 pt-4 border-t border-slate-200">
           <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wide">Key Technical Architecture Highlights</h3>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 text-xs">
             
             <div class="p-3.5 rounded border border-slate-200 bg-slate-50">
               <span class="font-bold text-slate-900 block mb-1">Frontend Engineering</span>
-              <p class="text-slate-600">Reactive single-page architecture with real-time SVG barcode rendering, canvas DataMatrix ECC200 generator, WYSIWYG 300 DPI print stylesheets, and zero external runtime dependencies.</p>
+              <p class="text-slate-600">Reactive single-page architecture with real-time SVG barcode rendering, canvas DataMatrix ECC200 generator, WYSIWYG 300 DPI print stylesheets, and responsive mobile-first UI.</p>
             </div>
 
             <div class="p-3.5 rounded border border-slate-200 bg-slate-50">
               <span class="font-bold text-slate-900 block mb-1">AI Regulatory Engine</span>
-              <p class="text-slate-600">Rule-based heuristic evaluator checking ISO 15223-1 symbols, GTIN-14 modulo 10 checksums, shelf-life date chronology, and EU MDR GSPR 23 multi-lingual cautionary statements.</p>
+              <p class="text-slate-600">Rule-based heuristic evaluator checking ISO 15223-1 symbols, GTIN-14 modulo 10 checksums, shelf-life date chronology, and multilingual cautionary statements.</p>
             </div>
 
             <div class="p-3.5 rounded border border-slate-200 bg-slate-50">
@@ -1019,15 +1145,15 @@
   <!-- ==========================================
        ELECTRONIC SIGNATURE MODAL (21 CFR PART 11)
        ========================================== -->
-  <div id="sign-modal" class="modal-backdrop fixed inset-0 z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-xl shadow-2xl border border-slate-200 max-w-md w-full p-6 space-y-4">
+  <div id="sign-modal" class="modal-backdrop fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white rounded-xl shadow-2xl border border-slate-200 max-w-md w-full p-5 sm:p-6 space-y-4">
       
       <div class="flex items-center justify-between pb-3 border-b border-slate-200">
         <div class="flex items-center space-x-2">
           <div class="p-1.5 rounded-md bg-teal-50 text-teal-700">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
           </div>
-          <h3 class="text-base font-bold text-slate-900">Execute 21 CFR Part 11 Digital Signature</h3>
+          <h3 class="text-base font-bold text-slate-900">21 CFR Part 11 Digital Signature</h3>
         </div>
         <button id="close-sign-modal-btn" type="button" class="text-slate-400 hover:text-slate-600">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -1041,7 +1167,7 @@
       <form id="sign-form" class="space-y-3" onsubmit="return false;">
         <div>
           <label for="sign-operator-name" class="block text-xs font-semibold text-slate-700 mb-1">Operator Full Legal Name *</label>
-          <input type="text" id="sign-operator-name" value="Aswith" class="w-full bg-slate-50 border border-slate-300 rounded px-3 py-1.5 text-xs font-medium text-slate-900 focus:ring-teal-600 focus:border-teal-600">
+          <input type="text" id="sign-operator-name" value="Naga Aswith" class="w-full bg-slate-50 border border-slate-300 rounded px-3 py-1.5 text-xs font-medium text-slate-900 focus:ring-teal-600 focus:border-teal-600">
         </div>
 
         <div>
@@ -1054,7 +1180,7 @@
           <select id="sign-reason" class="w-full bg-slate-50 border border-slate-300 rounded px-3 py-1.5 text-xs text-slate-900 font-medium">
             <option value="I have reviewed and approved this medical device label for commercial release.">I have reviewed and approved this label for commercial release.</option>
             <option value="I authorize AI regulatory scan override following manual inspection.">I authorize AI regulatory scan override following manual inspection.</option>
-            <option value="I confirm multi-lingual accuracy for EU MDR CE distribution.">I confirm multi-lingual accuracy for EU MDR CE distribution.</option>
+            <option value="I confirm multi-lingual accuracy for CDSCO / EU MDR CE distribution.">I confirm multi-lingual accuracy for CDSCO / EU MDR CE distribution.</option>
           </select>
         </div>
 
@@ -1065,7 +1191,7 @@
 
         <div class="pt-3 border-t border-slate-200 flex items-center justify-end space-x-2">
           <button id="cancel-sign-modal-btn" type="button" class="px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-100 rounded border border-slate-300 transition">Cancel</button>
-          <button id="submit-signature-btn" type="button" class="px-4 py-1.5 text-xs font-bold text-white bg-teal-700 hover:bg-teal-800 rounded shadow-sm transition">Sign & Append to Audit Ledger</button>
+          <button id="submit-signature-btn" type="button" class="px-4 py-1.5 text-xs font-bold text-white bg-teal-700 hover:bg-teal-800 rounded shadow-sm transition">Sign & Append to Ledger</button>
         </div>
       </form>
 
@@ -1075,25 +1201,25 @@
   <!-- ==========================================
        TOAST NOTIFICATION COMPONENT
        ========================================== -->
-  <div id="toast-container" class="fixed bottom-5 right-5 z-50 space-y-2 pointer-events-none">
+  <div id="toast-container" class="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-50 space-y-2 pointer-events-none">
     <!-- Dynamically appended toasts -->
   </div>
 
   <!-- ==========================================
        FOOTER
        ========================================== -->
-  <footer class="no-print bg-white border-t border-slate-200 mt-12 py-6 px-4 sm:px-6 lg:px-8 text-xs text-slate-500">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+  <footer class="no-print bg-white border-t border-slate-200 mt-10 sm:mt-12 py-5 sm:py-6 px-3 sm:px-6 lg:px-8 text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
       <div>
         <p class="font-medium text-slate-700">MedLabel.ai — Medical Device Labeling Automation & Compliance Management Platform</p>
-        <p class="mt-0.5">Designed for <strong>Tata Elxsi TELIPORT Season 4</strong> · Case Study 4 | <strong>Team: Creative Mind</strong> (Vignan's Lara · Lead: Aswith)</p>
+        <p class="mt-0.5">Designed for <strong>Tata Elxsi TELIPORT Season 4</strong> · Case Study 4 | <strong>Team: Creative Mind</strong> (Vignan's Lara Institute of Technology and Science · Leader: <strong>Naga Aswith</strong>)</p>
       </div>
-      <div class="flex items-center space-x-4">
+      <div class="flex items-center space-x-3 sm:space-x-4">
         <span class="inline-flex items-center text-emerald-700 font-medium">
           <span class="w-2 h-2 rounded-full bg-emerald-500 mr-1.5"></span>
-          21 CFR Part 11 Ledger: Secure
+          21 CFR Part 11: Secure
         </span>
-        <span>Version 1.4.2-prod</span>
+        <span>v1.4.2-prod</span>
       </div>
     </div>
   </footer>
