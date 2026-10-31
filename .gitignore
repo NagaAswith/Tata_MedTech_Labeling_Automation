@@ -1,8 +1,16 @@
-__pycache__/
-*.py[cod]
-*$py.class
-.vscode/
-.idea/
+# OS & Editor files
 .DS_Store
 Thumbs.db
+.vscode/
+.idea/
 
+# Vercel & Node
+.vercel/
+node_modules/
+
+# Python exclusion (strictly static repository)
+__pycache__/
+*.py
+*.py[cod]
+*.toml
+requirements.txt

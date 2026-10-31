@@ -2,7 +2,7 @@
  * ============================================================================
  * MedLabel.ai — Medical Device Labeling Automation & Compliance Platform
  * Tata Elxsi TELIPORT Season 4 · Case Study 4 | Team: Creative Mind
- * Lead Developer & Regulatory Engineer: Naga Aswith (Vignan's Lara)
+ * Lead Developer & Regulatory Engineer: Aswith (Vignan's Lara)
  * ============================================================================
  */
 
@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let AUDIT_TRAIL = [
     {
       timestamp: '2026-10-31 16:35:10 UTC',
-      operator: 'Naga Aswith (Lead Regulatory Eng.)',
+      operator: 'Aswith (Lead Regulatory Eng.)',
       action: 'Template Initialized (Infusion Pump Model X)',
       hash: '9f8a32b1e76c5432aa81029df4b87c1e',
       status: 'VERIFIED',
@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       timestamp: '2026-10-31 16:42:18 UTC',
-      operator: 'Naga Aswith (Lead Regulatory Eng.)',
+      operator: 'Aswith (Lead Regulatory Eng.)',
       action: 'UDI Checksum Validation (GTIN-14)',
       hash: '3c8e41a0b9432f78e0192a54b3c9902a',
       status: 'VALIDATED',
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       timestamp: '2026-10-31 16:55:01 UTC',
-      operator: 'Naga Aswith (Lead Regulatory Eng.)',
+      operator: 'Aswith (Lead Regulatory Eng.)',
       action: 'CDSCO Multilingual Pack Activated (Hindi & Telugu)',
       hash: 'bb21908cae105e49c7661048df9911e2',
       status: 'SYNCHRONIZED',
@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       timestamp: '2026-10-31 17:15:30 UTC',
-      operator: 'Naga Aswith (Lead Regulatory Eng.)',
+      operator: 'Aswith (Lead Regulatory Eng.)',
       action: 'Digital Signature Approved (21 CFR §11.50)',
       hash: 'e480ac92bd038910488274cf1b9a8421',
       status: 'SIGNED',
@@ -849,7 +849,7 @@ document.addEventListener('DOMContentLoaded', () => {
       projectName: 'MedLabel.ai',
       caseStudy: 'Tata Elxsi TELIPORT Season 4 · Case Study 4',
       team: 'Creative Mind',
-      leadEngineer: 'Naga Aswith',
+      leadEngineer: 'Aswith',
       timestampUtc: new Date().toISOString(),
       deviceProfile: {
         tradeName: inputDeviceName.value,
@@ -927,7 +927,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     AUDIT_TRAIL.unshift({
       timestamp: utcStr,
-      operator: 'Naga Aswith (Lead Regulatory Eng.)',
+      operator: 'Aswith (Lead Regulatory Eng.)',
       action: action,
       hash: hashHex,
       status: status || 'VERIFIED',
@@ -957,7 +957,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (submitSignatureBtn) {
     submitSignatureBtn.addEventListener('click', () => {
-      const name = document.getElementById('sign-operator-name').value.trim() || 'Naga Aswith';
+      const name = document.getElementById('sign-operator-name').value.trim() || 'Aswith';
       const role = document.getElementById('sign-operator-role').value.trim() || 'Lead Regulatory Eng.';
       const reason = document.getElementById('sign-reason').value;
 

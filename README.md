@@ -5,6 +5,7 @@
 [![Regulatory Compliance](https://img.shields.io/badge/Compliance-FDA%2021%20CFR%20%7C%20EU%20MDR%20%7C%20CDSCO%20India%20%7C%20ISO%2015223--1-059669?style=for-the-badge)](.)
 [![Team](https://img.shields.io/badge/Team-Creative%20Mind-4338CA?style=for-the-badge)](.)
 [![GitHub Repository](https://img.shields.io/badge/GitHub-Tata__MedTech__Labeling__Automation-1E293B?style=for-the-badge&logo=github)](https://github.com/NagaAswith/Tata_MedTech_Labeling_Automation)
+[![Vercel Deployment](https://img.shields.io/badge/Vercel-Live%20Production-black?style=for-the-badge&logo=vercel)](https://tata-medtech-labeling-automation.vercel.app)
 
 ---
 
@@ -13,7 +14,7 @@
 ### Tata Elxsi TELIPORT Season 4 · Case Study 4
 Medical device labeling errors represent over **40% of all global medical device recalls and FDA Form 483 warning letters**. The transition from legacy regional labeling to strict global standards—specifically **US FDA 21 CFR Part 801/830 (UDI)**, **EU MDR 2017/745 (GSPR 23)**, **CDSCO India Medical Device Rules 2017**, and **ISO 15223-1:2021**—demands zero-defect accuracy, automated traceability, multi-market language localization, and immutable **FDA 21 CFR Part 11** electronic records.
 
-**MedLabel.ai** is an enterprise-grade, end-to-end medical device labeling automation and regulatory compliance platform engineered specifically for **Tata Elxsi TELIPORT Season 4 (Case Study 4)** by **Team Creative Mind**.
+**MedLabel.ai** is an enterprise-grade, high-performance static medical device labeling automation and regulatory compliance platform engineered specifically for **Tata Elxsi TELIPORT Season 4 (Case Study 4)** by **Team Creative Mind**.
 
 ---
 
@@ -22,11 +23,12 @@ Medical device labeling errors represent over **40% of all global medical device
 | Attribute | Details |
 | :--- | :--- |
 | **Team Name** | **Creative Mind** |
-| **Institution** | **Vignan's Lara Institute of Technology and Science** |
-| **Team Leader & Lead Architect** | **Naga Aswith** |
+| **Institution** | **Vignan's Lara** |
+| **Team Leader & Lead Architect** | **Aswith** |
 | **Track / Event** | Tata Elxsi TELIPORT Season 4 — Case Study 4 |
 | **Target Repository** | [`Tata_MedTech_Labeling_Automation`](https://github.com/NagaAswith/Tata_MedTech_Labeling_Automation) |
-| **Version** | `v1.4.2-prod` (Enterprise Prototype) |
+| **Live Vercel Production URL** | [`https://tata-medtech-labeling-automation.vercel.app`](https://tata-medtech-labeling-automation.vercel.app) |
+| **Architecture** | 100% Static High-Performance Jamstack (Zero Serverless Cold Starts) |
 
 ---
 
@@ -74,41 +76,34 @@ Medical device labeling errors represent over **40% of all global medical device
 
 ---
 
-## 🏗️ System Architecture & Tech Stack
+## 🏗️ System Architecture & Static Deployment
 
 ```
-                                +--------------------------------------------+
-                                |               MedLabel.ai UI               |
-                                |     (Tailwind CSS, HTML5, Vanilla JS)      |
-                                +---------------------+----------------------+
-                                                      |
-                         +----------------------------+----------------------------+
-                         |                                                         |
-                         v                                                         v
-         +-------------------------------+                         +-------------------------------+
-         |       Client-Side Engine      |                         |      FastAPI Backend Core     |
-         |  - Real-time SVG Barcode Gen  |                         |         (server.py)           |
-         |  - Canvas DataMatrix ECC200   |                         |  - RESTful API Endpoints      |
-         |  - 3-Dots Multi-Language Menu |                         |  - Pydantic Schema Validation |
-         |  - Reactive ISO Symbol State  |                         |  - SHA-256 Cryptographic Hash |
-         |  - Mobile Viewport Scaling    |                         |  - Multi-lingual Dictionaries |
-         +-------------------------------+                         +---------------+---------------+
-                                                                                   |
-                                                                                   v
-                                                                   +-------------------------------+
-                                                                   |      Regulatory Standards     |
-                                                                   |  - FDA 21 CFR Part 801/830    |
-                                                                   |  - EU MDR 2017/745 GSPR 23    |
-                                                                   |  - CDSCO Medical Device Rules |
-                                                                   |  - ISO 15223-1:2021           |
-                                                                   |  - FDA 21 CFR Part 11         |
-                                                                   +-------------------------------+
++----------------------------------------------------------------------------+
+|                          Vercel Global Edge CDN                            |
+|                 https://tata-medtech-labeling-automation.vercel.app        |
++-------------------------------------+--------------------------------------+
+                                      |
+                   +------------------+------------------+
+                   |                                     |
+                   v                                     v
++-------------------------------------+ +------------------------------------+
+|             Static Core             | |        Client-Side Engines         |
+|  - index.html (WYSIWYG Studio)      | |  - Real-time SVG Barcode Gen       |
+|  - styles.css (Clinical tokens)     | |  - Canvas DataMatrix ECC200        |
+|  - app.js (Regulatory logic)        | |  - 3-Dots Multi-Language Engine    |
+|  - vercel.json (Static routes)      | |  - SHA-256 Part 11 Audit Ledger    |
++-------------------------------------+ +------------------------------------+
 ```
 
-### Technologies Used:
-- **Frontend**: HTML5, Modern CSS / Tailwind CSS, Vanilla JavaScript (ES6+), Canvas API, SVG vector engine.
-- **Backend**: Python 3.10+, FastAPI, Uvicorn, Pydantic, Python Standard Library (`hashlib`, `json`, `datetime`).
-- **Aesthetic**: Warm enterprise MedTech design system (Soft off-white `#F8FAFC`, Clinical Teal `#0F766E`, Deep Slate `#1E293B`, Subtle borders `#E2E8F0`).
+### Static Configuration (`vercel.json`)
+```json
+{
+  "version": 2,
+  "builds": [ { "src": "index.html", "use": "@vercel/static" } ],
+  "routes": [ { "src": "/(.*)", "dest": "/index.html" } ]
+}
+```
 
 ---
 
@@ -119,73 +114,21 @@ Tata_Medical_website/
 ├── index.html          # Main single-page application dashboard UI
 ├── styles.css          # Design system, medical label styling, and print stylesheets
 ├── app.js              # Reactive UI controllers, GS1 barcode generator, 3-dots language switcher
-├── server.py           # FastAPI backend server with REST endpoints & Part 11 audit storage
-├── requirements.txt    # Python backend dependencies (FastAPI, Uvicorn, Pydantic)
+├── vercel.json         # Vercel static build & routing configuration
+├── .gitignore          # Clean repository hygiene
 └── README.md           # Professional project documentation for Tata Elxsi jury
 ```
 
 ---
 
-## ⚡ Quick Start & Installation
+## ⚡ Quick Start & Verification
 
-### Option 1: Zero-Install Standalone Frontend (Instant Demo)
-Because MedLabel.ai is engineered with zero runtime build dependencies:
-1. Double-click `index.html` in your file explorer, OR
-2. Drag and drop `index.html` into Google Chrome, Microsoft Edge, or Mozilla Firefox.
-3. All interactive features—live label generation, barcode synthesis, AI regulatory scans, 3-dots localization, and audit trail signing—operate client-side immediately!
+### Option 1: Live Cloud Production URL
+Access the live prototype deployed on Vercel at:  
+👉 **[https://tata-medtech-labeling-automation.vercel.app](https://tata-medtech-labeling-automation.vercel.app)**
 
----
-
-### Option 2: Running with Python FastAPI Backend
-
-#### Step 1: Open Terminal in Project Directory
-```powershell
-cd d:\K\Tata_Medical_website
-```
-
-#### Step 2: Install Python Dependencies
-```powershell
-pip install -r requirements.txt
-```
-
-#### Step 3: Start the FastAPI Server
-```powershell
-python server.py
-```
-
-#### Step 4: Access Application & Interactive Docs
-- **Dashboard UI**: [http://localhost:8000](http://localhost:8000)
-- **FastAPI Interactive Swagger Docs**: [http://localhost:8000/docs](http://localhost:8000/docs)
-- **API Health Check**: [http://localhost:8000/api/health](http://localhost:8000/api/health)
-
-*(Note: If FastAPI is not yet installed in your Python environment, running `python server.py` will automatically and gracefully start Python's built-in HTTP server on port 8000 so the UI remains immediately accessible!)*
-
----
-
-## 🧪 Verification & Acceptance Test Scenarios
-
-| Test Case | Steps to Test | Expected Result |
-| :--- | :--- | :--- |
-| **TC-01: Live Reactive Editing** | Modify "Device Commercial Name" to "CardioFlow X" | Live preview header updates instantaneously. |
-| **TC-02: GS1 UDI Checksum** | Click "Verify Checksum" button | Calculates check digit via modulo 10 and updates UDI HRI text & SVG stripes. |
-| **TC-03: ISO Symbol Toggles** | Uncheck `STERILE EO` or `Keep Dry` | The corresponding ISO standardized symbol box in the preview toggles off in real time. |
-| **TC-04: AI Regulatory Scan** | Click "Run AI Regulatory Scan" | Progress beam animates across 5 rules, followed by a detailed compliance audit report card with score and status badges. |
-| **TC-05: 3-Dots Language Switch** | Click 3-dots icon (`•••`), select `हिन्दी` or `తెలుగు` | Warning text and device description update immediately to Indian regulatory phrasing; checkmark updates; audit log records the switch. |
-| **TC-06: 21 CFR Part 11 Sign-off** | Click "Sign", enter password, and submit | Adds a new cryptographically hashed (SHA-256) signature entry to the live audit table. |
-| **TC-07: Print Simulation** | Click "Print" | Browser print preview renders only the physical label at 300 DPI without navigation chrome. |
-
----
-
-## 📜 Regulatory Reference Compliance Matrix
-
-- **US FDA 21 CFR § 801.20**: Unique device identifier requirements on label.
-- **US FDA 21 CFR § 801.109**: Prescription-device requirements ("Rx Only").
-- **US FDA 21 CFR § 11.10**: Controls for closed electronic systems and time-stamped audit trails.
-- **US FDA 21 CFR § 11.50**: Electronic signature manifest requirements.
-- **CDSCO Medical Device Rules 2017**: Standards for medical device packaging, language requirements, and UDI implementation in India.
-- **EU MDR 2017/745 Annex I, Chapter III (GSPR 23)**: Information supplied by the manufacturer with the device.
-- **ISO 15223-1:2021**: Medical devices — Symbols to be used with information to be supplied by the manufacturer.
-- **GS1 Healthcare General Specifications**: Application Identifiers `(01)` GTIN, `(17)` Expiration Date, `(10)` Lot Number, `(21)` Serial Number.
+### Option 2: Local Static Launch
+Simply open `index.html` directly in any web browser (Chrome, Edge, Firefox, Safari). Zero build tools, dependencies, or server installations are required.
 
 ---
 
@@ -194,6 +137,6 @@ python server.py
 - **Competition**: Tata Elxsi TELIPORT Season 4
 - **Case Study**: Case Study 4 — Medical Device Labeling Automation & Compliance Management
 - **Team**: Creative Mind
-- **College / Institute**: Vignan's Lara Institute of Technology and Science
-- **Team Leader & Principal Author**: Naga Aswith
-- **GitHub Target**: [Tata_MedTech_Labeling_Automation](https://github.com/NagaAswith/Tata_MedTech_Labeling_Automation)
+- **College / Institute**: Vignan's Lara
+- **Team Leader & Principal Author**: Aswith
+- **GitHub Repository**: [Tata_MedTech_Labeling_Automation](https://github.com/NagaAswith/Tata_MedTech_Labeling_Automation)
