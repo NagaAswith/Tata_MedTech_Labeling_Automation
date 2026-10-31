@@ -13,6 +13,27 @@ import hashlib
 from datetime import datetime, timezone
 from typing import List, Dict, Optional, Any
 
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
+from pydantic import BaseModel
+
+# Top-level FastAPI application instance required by Vercel and Uvicorn
+app = FastAPI(
+    title="MedLabel.ai API",
+    description="End-to-End Medical Device Labeling Automation & Compliance Backend for Tata Elxsi TELIPORT Season 4 (Team Creative Mind, Naga Aswith)",
+    version="1.4.2"
+)
+
+# Enable CORS for cross-origin frontend requests
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Pre-defined Medical Device Presets
 DEVICE_PRESETS = {
     "infusion-pump": {
@@ -242,226 +263,193 @@ def generate_sha256_hash(data: str) -> str:
     """Generates tamper-evident SHA-256 hash for 21 CFR Part 11 audit records."""
     return hashlib.sha256(data.encode("utf-8")).hexdigest()
 
-# Try to run as full FastAPI server; fallback to http.server if dependencies are pending
-try:
-    from fastapi import FastAPI, HTTPException, Request
-    from fastapi.middleware.cors import CORSMiddleware
-    from fastapi.responses import FileResponse, JSONResponse
-    from fastapi.staticfiles import StaticFiles
-    from pydantic import BaseModel
+# Pydantic Models
+class LabelRequest(BaseModel):
+    name: str
+    ref: str
+    deviceClass: str
+    gtin: str
+    lot: str
+    sn: str
+    mfgDate: str
+    expDate: str
+    mfr: str
+    ecrep: Optional[str] = ""
+    warning: str
+    symbols: Dict[str, bool]
+
+class SignatureRequest(BaseModel):
+    operatorName: str
+    operatorRole: str
+    reason: str
+    password: str
+
+class TranslateRequest(BaseModel):
+    targetLang: str
+    deviceName: str
+
+@app.get("/api/health")
+def health_check():
+    return {
+        "status": "healthy",
+        "regulatoryEngine": "ACTIVE",
+        "standards": [
+            "FDA 21 CFR Part 801 (Medical Device Labeling)",
+            "FDA 21 CFR Part 830 (Unique Device Identification)",
+            "FDA 21 CFR Part 11 (Electronic Records & Signatures)",
+            "EU MDR 2017/745 (Annex I GSPR 23)",
+            "CDSCO India Medical Device Rules 2017",
+            "ISO 15223-1:2021 (Medical Device Symbols)"
+        ],
+        "team": "Creative Mind (Vignan's Lara Institute of Technology and Science)",
+        "leadEngineer": "Naga Aswith",
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    }
+
+@app.get("/api/templates")
+def get_templates():
+    return {"templates": DEVICE_PRESETS}
+
+@app.post("/api/labels/generate")
+def generate_label(req: LabelRequest):
+    is_gtin_valid = validate_gtin14(req.gtin)
+    exp_parts = req.expDate.split("-")
+    exp_gs1 = f"{exp_parts[0][-2:]}{exp_parts[1]}{exp_parts[2]}" if len(exp_parts) == 3 else "281031"
+    hri = f"(01){req.gtin}(17){exp_gs1}(10){req.lot}(21){req.sn}"
+    
+    return {
+        "success": True,
+        "hri": hri,
+        "gtinValid": is_gtin_valid,
+        "udiPureString": f"=+/01{req.gtin}=17{exp_gs1}=10{req.lot}=21{req.sn}",
+        "generatedAt": datetime.now(timezone.utc).isoformat()
+    }
+
+@app.post("/api/compliance/audit")
+def audit_compliance(req: LabelRequest):
+    is_gtin_valid = validate_gtin14(req.gtin)
+    
+    try:
+        mfg_d = datetime.strptime(req.mfgDate, "%Y-%m-%d")
+        exp_d = datetime.strptime(req.expDate, "%Y-%m-%d")
+        dates_valid = exp_d > mfg_d
+    except Exception:
+        dates_valid = False
+
+    has_mfr = len(req.mfr.strip()) > 5
+    has_warning = len(req.warning.strip()) > 10
+
+    score = 99
+    if not is_gtin_valid: score -= 15
+    if not dates_valid: score -= 25
+    if not has_mfr: score -= 10
+    if not has_warning: score -= 10
+
+    checks = [
+        {
+            "standard": "FDA 21 CFR Part 801 & CDSCO (UDI)",
+            "status": "VALIDATED" if is_gtin_valid else "FAILED",
+            "details": "GTIN-14 checksum and Application Identifiers verified." if is_gtin_valid else "Invalid GTIN-14 check digit."
+        },
+        {
+            "standard": "ISO 15223-1:2021",
+            "status": "PASSED",
+            "details": "Harmonized graphical symbols validated against ISO standard dimensions."
+        },
+        {
+            "standard": "EU MDR 2017/745 GSPR 23",
+            "status": "COMPLIANT" if has_mfr and req.ecrep else "ADVISORY",
+            "details": "Legal manufacturer and European Authorized Representative [EC REP] present."
+        },
+        {
+            "standard": "Shelf Life & Expiration Integrity",
+            "status": "PASSED" if dates_valid else "FAILED",
+            "details": "Expiry date chronologically succeeds manufacturing date." if dates_valid else "Invalid expiration chronology."
+        }
+    ]
+
+    audit_record = {
+        "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC"),
+        "operator": "MedLabel Algorithmic Regulatory Engine",
+        "action": f"Regulatory Scan for {req.name} ({req.ref})",
+        "hash": generate_sha256_hash(f"{req.ref}_{req.gtin}_{datetime.now().timestamp()}"),
+        "status": "GRADE A+" if score >= 90 else "NEEDS REMEDIATION",
+        "type": "SCAN"
+    }
+    AUDIT_TRAIL_RECORDS.insert(0, audit_record)
+
+    return {
+        "score": max(score, 50),
+        "verdict": "PASSED" if score >= 90 else "NEEDS REMEDIATION",
+        "checks": checks,
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    }
+
+@app.post("/api/localization/translate")
+def translate_market(req: TranslateRequest):
+    lang = req.targetLang.lower()
+    if lang not in LOCALIZATION_DATA:
+        raise HTTPException(status_code=400, detail="Language not supported")
+    return {
+        "lang": lang,
+        "data": LOCALIZATION_DATA[lang]
+    }
+
+@app.get("/api/audit-trail")
+def get_audit_trail(actionType: Optional[str] = "ALL"):
+    if actionType == "ALL":
+        return {"records": AUDIT_TRAIL_RECORDS}
+    return {"records": [r for r in AUDIT_TRAIL_RECORDS if r.get("type") == actionType]}
+
+@app.post("/api/audit-trail/sign")
+def submit_electronic_signature(req: SignatureRequest):
+    now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+    hash_val = generate_sha256_hash(f"{now_str}_{req.operatorName}_{req.reason}")
+    
+    record = {
+        "timestamp": now_str,
+        "operator": f"{req.operatorName} ({req.operatorRole})",
+        "action": f"Digital Signature Approved (21 CFR §11.50): {req.reason}",
+        "hash": hash_val,
+        "status": "SIGNED",
+        "type": "SIGNATURE"
+    }
+    AUDIT_TRAIL_RECORDS.insert(0, record)
+    return {"success": True, "record": record}
+
+# Static file serving handlers for local development and direct HTTP delivery
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+@app.get("/")
+def serve_index():
+    index_path = os.path.join(current_dir, "index.html")
+    if os.path.exists(index_path):
+        with open(index_path, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read(), media_type="text/html")
+    return HTMLResponse("<h1>MedLabel AI API Running</h1>")
+
+@app.get("/styles.css")
+def serve_css():
+    css_path = os.path.join(current_dir, "styles.css")
+    if os.path.exists(css_path):
+        with open(css_path, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read(), media_type="text/css")
+    return HTMLResponse("", media_type="text/css")
+
+@app.get("/app.js")
+def serve_js():
+    js_path = os.path.join(current_dir, "app.js")
+    if os.path.exists(js_path):
+        with open(js_path, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read(), media_type="application/javascript")
+    return HTMLResponse("", media_type="application/javascript")
+
+if __name__ == "__main__":
     import uvicorn
-
-    app = FastAPI(
-        title="MedLabel.ai API",
-        description="End-to-End Medical Device Labeling Automation & Compliance Backend for Tata Elxsi TELIPORT Season 4 (Team Creative Mind, Naga Aswith)",
-        version="1.4.2"
-    )
-
-    # Enable CORS for cross-origin frontend support
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=["*"],
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
-
-    # Pydantic Request Models
-    class LabelRequest(BaseModel):
-        name: str
-        ref: str
-        deviceClass: str
-        gtin: str
-        lot: str
-        sn: str
-        mfgDate: str
-        expDate: str
-        mfr: str
-        ecrep: Optional[str] = ""
-        warning: str
-        symbols: Dict[str, bool]
-
-    class SignatureRequest(BaseModel):
-        operatorName: str
-        operatorRole: str
-        reason: str
-        password: str
-
-    class TranslateRequest(BaseModel):
-        targetLang: str
-        deviceName: str
-
-    @app.get("/api/health")
-    def health_check():
-        return {
-            "status": "healthy",
-            "regulatoryEngine": "ACTIVE",
-            "standards": [
-                "FDA 21 CFR Part 801 (Medical Device Labeling)",
-                "FDA 21 CFR Part 830 (Unique Device Identification)",
-                "FDA 21 CFR Part 11 (Electronic Records & Signatures)",
-                "EU MDR 2017/745 (Annex I GSPR 23)",
-                "CDSCO India Medical Device Rules 2017",
-                "ISO 15223-1:2021 (Medical Device Symbols)"
-            ],
-            "team": "Creative Mind (Vignan's Lara Institute of Technology and Science)",
-            "leadEngineer": "Naga Aswith",
-            "timestamp": datetime.now(timezone.utc).isoformat()
-        }
-
-    @app.get("/api/templates")
-    def get_templates():
-        return {"templates": DEVICE_PRESETS}
-
-    @app.post("/api/labels/generate")
-    def generate_label(req: LabelRequest):
-        is_gtin_valid = validate_gtin14(req.gtin)
-        exp_parts = req.expDate.split("-")
-        exp_gs1 = f"{exp_parts[0][-2:]}{exp_parts[1]}{exp_parts[2]}" if len(exp_parts) == 3 else "281031"
-        hri = f"(01){req.gtin}(17){exp_gs1}(10){req.lot}(21){req.sn}"
-        
-        return {
-            "success": True,
-            "hri": hri,
-            "gtinValid": is_gtin_valid,
-            "udiPureString": f"=+/01{req.gtin}=17{exp_gs1}=10{req.lot}=21{req.sn}",
-            "generatedAt": datetime.now(timezone.utc).isoformat()
-        }
-
-    @app.post("/api/compliance/audit")
-    def audit_compliance(req: LabelRequest):
-        is_gtin_valid = validate_gtin14(req.gtin)
-        
-        try:
-            mfg_d = datetime.strptime(req.mfgDate, "%Y-%m-%d")
-            exp_d = datetime.strptime(req.expDate, "%Y-%m-%d")
-            dates_valid = exp_d > mfg_d
-        except Exception:
-            dates_valid = False
-
-        has_mfr = len(req.mfr.strip()) > 5
-        has_warning = len(req.warning.strip()) > 10
-
-        score = 99
-        if not is_gtin_valid: score -= 15
-        if not dates_valid: score -= 25
-        if not has_mfr: score -= 10
-        if not has_warning: score -= 10
-
-        checks = [
-            {
-                "standard": "FDA 21 CFR Part 801 & CDSCO (UDI)",
-                "status": "VALIDATED" if is_gtin_valid else "FAILED",
-                "details": "GTIN-14 checksum and Application Identifiers verified." if is_gtin_valid else "Invalid GTIN-14 check digit."
-            },
-            {
-                "standard": "ISO 15223-1:2021",
-                "status": "PASSED",
-                "details": "Harmonized graphical symbols validated against ISO standard dimensions."
-            },
-            {
-                "standard": "EU MDR 2017/745 GSPR 23",
-                "status": "COMPLIANT" if has_mfr and req.ecrep else "ADVISORY",
-                "details": "Legal manufacturer and European Authorized Representative [EC REP] present."
-            },
-            {
-                "standard": "Shelf Life & Expiration Integrity",
-                "status": "PASSED" if dates_valid else "FAILED",
-                "details": "Expiry date chronologically succeeds manufacturing date." if dates_valid else "Invalid expiration chronology."
-            }
-        ]
-
-        audit_record = {
-            "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC"),
-            "operator": "MedLabel Algorithmic Regulatory Engine",
-            "action": f"Regulatory Scan for {req.name} ({req.ref})",
-            "hash": generate_sha256_hash(f"{req.ref}_{req.gtin}_{datetime.now().timestamp()}"),
-            "status": "GRADE A+" if score >= 90 else "NEEDS REMEDIATION",
-            "type": "SCAN"
-        }
-        AUDIT_TRAIL_RECORDS.insert(0, audit_record)
-
-        return {
-            "score": max(score, 50),
-            "verdict": "PASSED" if score >= 90 else "NEEDS REMEDIATION",
-            "checks": checks,
-            "timestamp": datetime.now(timezone.utc).isoformat()
-        }
-
-    @app.post("/api/localization/translate")
-    def translate_market(req: TranslateRequest):
-        lang = req.targetLang.lower()
-        if lang not in LOCALIZATION_DATA:
-            raise HTTPException(status_code=400, detail="Language not supported")
-        return {
-            "lang": lang,
-            "data": LOCALIZATION_DATA[lang]
-        }
-
-    @app.get("/api/audit-trail")
-    def get_audit_trail(actionType: Optional[str] = "ALL"):
-        if actionType == "ALL":
-            return {"records": AUDIT_TRAIL_RECORDS}
-        return {"records": [r for r in AUDIT_TRAIL_RECORDS if r.get("type") == actionType]}
-
-    @app.post("/api/audit-trail/sign")
-    def submit_electronic_signature(req: SignatureRequest):
-        now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
-        hash_val = generate_sha256_hash(f"{now_str}_{req.operatorName}_{req.reason}")
-        
-        record = {
-            "timestamp": now_str,
-            "operator": f"{req.operatorName} ({req.operatorRole})",
-            "action": f"Digital Signature Approved (21 CFR §11.50): {req.reason}",
-            "hash": hash_val,
-            "status": "SIGNED",
-            "type": "SIGNATURE"
-        }
-        AUDIT_TRAIL_RECORDS.insert(0, record)
-        return {"success": True, "record": record}
-
-    # Serve static assets
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-
-    @app.get("/")
-    def serve_index():
-        return FileResponse(os.path.join(current_dir, "index.html"))
-
-    @app.get("/styles.css")
-    def serve_css():
-        return FileResponse(os.path.join(current_dir, "styles.css"), media_type="text/css")
-
-    @app.get("/app.js")
-    def serve_js():
-        return FileResponse(os.path.join(current_dir, "app.js"), media_type="application/javascript")
-
-    if __name__ == "__main__":
-        print("=" * 70)
-        print("  MedLabel.ai — Tata Elxsi TELIPORT Season 4 (Team Creative Mind)")
-        print("  Lead: Naga Aswith | Vignan's Lara Institute of Technology and Science")
-        print("  FastAPI Server listening on http://127.0.0.1:8000")
-        print("  Access the full Dashboard UI at: http://localhost:8000")
-        print("=" * 70)
-        uvicorn.run("server:app", host="127.0.0.1", port=8000, reload=True)
-
-except ImportError:
-    import http.server
-    import socketserver
-
-    PORT = 8000
-    Handler = http.server.SimpleHTTPRequestHandler
-
-    if __name__ == "__main__":
-        print("=" * 70)
-        print("  [Notice] FastAPI / Uvicorn not yet installed in Python environment.")
-        print("  To install full backend API dependencies, run: pip install -r requirements.txt")
-        print(f"  Starting built-in HTTP server on http://localhost:{PORT} ...")
-        print("  Open http://localhost:8000 in your browser to view MedLabel.ai UI!")
-        print("=" * 70)
-        os.chdir(os.path.dirname(os.path.abspath(__file__)))
-        socketserver.TCPServer.allow_reuse_address = True
-        with socketserver.TCPServer(("127.0.0.1", PORT), Handler) as httpd:
-            try:
-                httpd.serve_forever()
-            except KeyboardInterrupt:
-                print("\nServer stopped.")
+    print("=" * 70)
+    print("  MedLabel.ai — Tata Elxsi TELIPORT Season 4 (Team Creative Mind)")
+    print("  Lead: Naga Aswith | Vignan's Lara Institute of Technology and Science")
+    print("  FastAPI Server listening on http://127.0.0.1:8000")
+    print("  Access Dashboard UI at: http://localhost:8000")
+    print("=" * 70)
+    uvicorn.run("server:app", host="0.0.0.0", port=8000, reload=True)
